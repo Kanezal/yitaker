@@ -7,7 +7,7 @@ class Chat:
     title = models.CharField(max_length= 25)# заголовок чата, его название
     creator = models.ForeignKey(to = User, on_delete = models.SET_NULL, null=True)# id пользователя создавшего чат
     icons = models.BinaryField() # иконка чата
-    date_of_creation = models.DateTimeField() # время создания
+    date_of_creation = models.DateTimeField(auto_now_add=True) # время создания
 
 class Message(models.Model):
     user_sender = models.ForeignKey(to = settings.AUTH_USER_MODEL, on_delete = models.SET_NULL, null=True, related_name = 'sender')

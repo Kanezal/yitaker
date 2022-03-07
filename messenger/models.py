@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 
-class Chat:
+class Chat(models.Model):
     title = models.CharField(max_length= 25)# заголовок чата, его название
     creator = models.ForeignKey(to = User, on_delete = models.SET_NULL, null=True)# id пользователя создавшего чат
     icons = models.BinaryField() # иконка чата

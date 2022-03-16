@@ -29,5 +29,6 @@ urlpatterns = [
     path('search/', include('search.urls')),
     path('messenger/', include('messenger.urls')),
     path('community/', include('community.urls')),
+    path('registration/', include('registration.urls')),
     path('admin/', admin.site.urls),
 ]

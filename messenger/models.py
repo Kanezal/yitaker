@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Chat(models.Model):
     title = models.CharField(max_length= 25)# заголовок чата, его название
     creator = models.ForeignKey(to = User, on_delete = models.SET_NULL, null=True)# id пользователя создавшего чат
-    icons = models.BinaryField() # иконка чата
+    icons = models.FileField() # иконка чата
     date_of_creation = models.DateTimeField(auto_now_add=True) # время создания
 
 class Message(models.Model):

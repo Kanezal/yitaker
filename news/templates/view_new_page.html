@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Новости</title>
+</head>
+<body>
+    <p><strong>{{new.sender}}</strong></p>
+    <p>{{ new.name_new }}</p>
+    <p>{{ new.text }}</p>
+    <p></p>
+    {% if new.picture != None %}
+        <img src="{% static new.picture %}" alt="">
+    {% endif %}
+    <p>{{new.likes}}</p>
+</body>
+</html>

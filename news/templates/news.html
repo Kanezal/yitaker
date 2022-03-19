@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Новости</title>
+</head>
+<body>
+    {% for n in news %}
+        <p><strong>{{n.sender}}</strong></p>
+        <td><a href="/news/{{n.id}}">{{n.name_new}}</a></td>
+        <p>{{ n.text }}</p>
+        <p></p>
+    {% endfor %}
+</body>
+</html>

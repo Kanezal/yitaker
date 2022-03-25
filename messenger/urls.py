@@ -4,6 +4,8 @@ from .views import *
 
 urlpatterns = [
     # path('', имя_функции, name='имя_для_вызова'),
+    path('f', simple),
+    #path('home', all_dialoges, name='home')
     
 ]
 

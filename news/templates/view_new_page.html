@@ -11,8 +11,12 @@
     <p>{{ new.text }}</p>
     <p></p>
     {% if new.picture != None %}
-        <img src="{% static new.picture %}" alt="">
+        <img src="{{ new.picture }}" alt="">
     {% endif %}
-    <p>{{new.likes}}</p>
+    {% if new.likes != None %}
+        <p>{{new.likes}}</p>
+    {% else %}
+        <p>0</p>
+    {% endif %}
 </body>
 </html>

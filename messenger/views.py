@@ -1,50 +1,62 @@
-from .models import Message
+from messenger.models import Message, Chat
+from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import CreateView
 from .forms import *
 from django.urls import reverse_lazy
-from django.shortcuts import render, redirect
+import datetime
 
-'''
-class RegisterUser(CreateView):
-    form_class = RegisterUserForm
-    template_name = 'registration.html'
-    success_url = reverse_lazy('login')
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return  dict(list(context.items()))
-
-    def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect('home')
-'''
-
-def simple(request):
+def messages(request): 
     has_errors = False
 
     if request.method == 'POST': 
-        f = MessageForm(request.POST)
-        if f.is_valid():
-            new_message = Message(user_sender = request.user,
-            text = f.cleaned_data['text']
-             )
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            new_message = Message(user_sender = request.user_sender, text = form.cleaned_data['text'], date_receipt = datetime.now())
             new_message.save()
 
         else:
             has_errors = True
     else:
-        f = MessageForm()
+        form = MessageForm()
+       
 
-    #page = int(request.GET.get('page') if request.GET.get('page') != None else 1)
-    #all_messages = Message.objects.order_by('-datetime')[(page - 1) * 10:(page - 1) * 10 + 10]
+    page = int(request.GET.get('page') if request.GET.get('page') != None else 1)
+
+    all_messages = Message.objects.order_by('-date_receipt')[(page - 1) * 10:(page - 1) * 10 + 10]
+   # all_messages = Message.objects.order_by('-date_receipt')
+
     ctx = {
-        'messages' : new_message,
-        'form' : f,
+        'messages' : all_messages,
+        'form' : form,
         'has_errors': has_errors
         }
 
-    return render(request, 'new.html', context = ctx)
+    return render(request, 'messages.html', context = ctx)
+
+def chats(request):
+    has_errors = False
+
+    if request.method == 'POST': 
+        form = ChatForm(request.POST)
+        if form.is_valid():
+            chat_el = Chat(title = request.title, date_of_creation = datetime.now())
+            chat_el.save()
+
+        else:
+            has_errors = True
+    else:
+        form = ChatForm()
+
+    page = int(request.GET.get('page') if request.GET.get('page') != None else 1)
+    all_chats = Message.objects.order_by('-date_receipt')[(page - 1) * 10:(page - 1) * 10 + 10]
+    ctx = {
+        'messages' : all_chats,
+        'form' : form,
+        'has_errors': has_errors
+        }
+
+    return render(request, 'chat.html', context = ctx)
+
 
     

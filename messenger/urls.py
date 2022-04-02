@@ -5,7 +5,7 @@ from .views import *
 urlpatterns = [
     # path('', имя_функции, name='имя_для_вызова'),
     path('messages', messages, name = 'messages'),
-    path('chats', chats, name = 'chats'),
+    path('chats', chats, name = 'chats')
 ]
 
 # Имя для вызова это сокращенное название функции, то есть должен отражаться

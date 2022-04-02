@@ -50,6 +50,7 @@ def chats(request):
 
     page = int(request.GET.get('page') if request.GET.get('page') != None else 1)
     all_chats = Message.objects.order_by('-date_receipt')[(page - 1) * 10:(page - 1) * 10 + 10]
+    
     ctx = {
         'messages' : all_chats,
         'form' : form,

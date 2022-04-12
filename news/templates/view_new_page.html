@@ -3,20 +3,20 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Новости</title>
+    <title>{{new.name_new}}</title>
 </head>
 <body>
-    <p><strong>{{new.sender}}</strong></p>
+    {% if new.sender != None %}
+        <p><strong>{{new.sender}}</strong></p>
+    {% else %}
+        <p><strong>Аноним</strong></p>
+    {% endif %}
     <p>{{ new.name_new }}</p>
     <p>{{ new.text }}</p>
     <p></p>
     {% if new.picture != None %}
         <img src="{{ new.picture }}" alt="">
     {% endif %}
-    {% if new.likes != None %}
-        <p>{{new.likes}}</p>
-    {% else %}
-        <p>0</p>
-    {% endif %}
 </body>
 </html>
+

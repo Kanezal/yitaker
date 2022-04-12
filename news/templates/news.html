@@ -6,7 +6,11 @@
 </head>
 <body>
     {% for n in news %}
-        <p><strong>{{n.sender}}</strong></p>
+        {% if n.sender != None %}
+            <p><strong>{{n.sender}}</strong></p>
+        {% else %}
+            <p><strong>Аноним</strong></p>
+        {% endif %}
         <td><a href="/news/{{n.id}}">{{n.name_new}}</a></td>
         <p>{{ n.text }}</p>
         <p></p>

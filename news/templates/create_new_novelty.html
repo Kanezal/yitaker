@@ -1,3 +1,11 @@
+{% block extra_css %}
+<style>
+    textarea {
+        font-family:monospace;
+    }
+</style>
+{% endblock %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +15,9 @@
 <body>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ addform.as_p }}
         <button type="submit">Создать пост</button>
     </form>
 
-    {% if img_obj %}
-        <h3>Пост успешно создан</h3>
-    {% endif %}
 </body>
 </html>

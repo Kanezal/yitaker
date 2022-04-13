@@ -7,17 +7,18 @@
 
 <body>
     <h1>Chat</h1>
-
-    {% for m in messages %}
-        <p> <strong>{{m.user_sender}}</strong> {{m.text}} </p>
-    {% endfor %}
-
     <div> 
         <form method="POST">
             {% csrf_token %}
             {{form}}
         <input type="submit" value="Отправить">
         </form>
-    <div> 
+    <div>
+
+    {% for m in messages %}
+         <p> <strong>{{m.user_sender}}</strong> {{m.text}}  {{m.date_receipt}}</p>
+    {% endfor %}
+
+ 
 </body>
 </html>

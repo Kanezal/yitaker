@@ -6,6 +6,19 @@
 </head>
 
 <body>
-<p>Chat</p> 
+
+    <p>Chat</p> 
+
+    {% for m in chat %}
+    <p> <strong>{{m.name}}</strong> </p>
+    {% endfor %}
+    
+    <div> 
+        <form method="POST">
+            {% csrf_token %}
+            {{form}}
+        </form>
+    <div> 
+
 </body>
 </html>

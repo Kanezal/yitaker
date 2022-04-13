@@ -12,7 +12,7 @@ def messages(request):
     if request.method == 'POST': 
         form = MessageForm(request.POST)
         if form.is_valid():
-            new_message = Message(user_sender = request.user_sender, text = form.cleaned_data['text'], date_receipt = datetime.now())
+            new_message = Message(user_sender = request.user, text = form.cleaned_data['text'], date_receipt = datetime.datetime.now())
             new_message.save()
 
         else:
@@ -24,7 +24,7 @@ def messages(request):
     page = int(request.GET.get('page') if request.GET.get('page') != None else 1)
 
     all_messages = Message.objects.order_by('-date_receipt')[(page - 1) * 10:(page - 1) * 10 + 10]
-   # all_messages = Message.objects.order_by('-date_receipt')
+
 
     ctx = {
         'messages' : all_messages,

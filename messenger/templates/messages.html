@@ -16,7 +16,7 @@
     <div>
 
     {% for m in messages %}
-         <p> <strong>{{m.user_sender}}</strong> {{m.text}}  {{m.date_receipt}}</p>
+         <p> <strong>{{m.user_sender}}</strong> {{m.text}}  {{m.date_receipt.hour}}:{{m.date_receipt.minute}}</p>
     {% endfor %}
 
  

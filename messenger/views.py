@@ -50,7 +50,11 @@ def chats(request):
     if request.method == 'POST': 
         form = ChatForm(request.POST)
         if form.is_valid():
-            chat_el = Chat(title = request.title, date_of_creation = datetime.now())
+            chat_el = Chat(
+            title = form.cleaned_data['title'],
+            user_creator = request.user,
+            date_of_creation = datetime.datetime.now(),
+            )
             chat_el.save()
 
         else:
@@ -58,16 +62,14 @@ def chats(request):
     else:
         form = ChatForm()
 
-    page = int(request.GET.get('page') if request.GET.get('page') != None else 1)
-    all_chats = Message.objects.order_by('-date_receipt')[(page - 1) * 10:(page - 1) * 10 + 10]
-    
+    all_chats =Chat.objects.all().order_by('-date_of_creation')
+
+
     ctx = {
-        'messages' : all_chats,
+        'chats' : all_chats,
         'form' : form,
         'has_errors': has_errors
-        }
+    }
 
-    return render(request, 'chat.html', context = ctx)
-
-
-    
+    return render(request, 'chats.html', context = ctx)
+         

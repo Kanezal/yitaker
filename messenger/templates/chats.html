@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+</head>
+
+<body>
+
+    <p><strong>Chats</strong></p> 
+
+    <form method="POST">
+        {% csrf_token %}
+        {{form}}
+    <input type="submit" value="создать">
+    </form>
+
+    {% for m in chats %}
+    <p> <strong><td><a href="chats/chat{{m.id}}">{{m.title}}</a></td></strong>   {{m.user_creator}}</p>
+    {% endfor %}
+    
+
+</body>
+</html>

@@ -1,9 +1,9 @@
 from django import forms
-from .models import Novelty
+from .models import Community
 
 
-class AddNoveltyForm(forms.Form):
-    name_new = forms.CharField(
+class AddGroupForm(forms.Form):
+    name = forms.CharField(
         label='Название',
         max_length=200,
         widget=forms.TextInput(
@@ -12,7 +12,7 @@ class AddNoveltyForm(forms.Form):
             }
         )
     )
-    sender = forms.CharField(
+    creater = forms.CharField(
         label='Пользователь',
         max_length=20,
         widget=forms.TextInput(
@@ -23,8 +23,8 @@ class AddNoveltyForm(forms.Form):
         ),
         required=False
     )
-    text = forms.CharField(
-        label='Текст',
+    description = forms.CharField(
+        label='Описание',
         max_length=5000,
         widget=forms.Textarea(
             attrs={
@@ -33,12 +33,25 @@ class AddNoveltyForm(forms.Form):
             }
         )
     )
-    picture = forms.ImageField(
-        label='Изображение'
+
+
+class AddInGroupForm(forms.Form):
+    user = forms.CharField(
+        label='Пользователь',
+        max_length=200,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control'
+            }
+        )
     )
-    group = forms.IntegerField(
+    group = forms.CharField(
         label='Группа',
-        required=False,
+        max_length=20,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'disabled': '',
+            }
+        ),
     )
-
-

@@ -2,13 +2,14 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Новости</title>
+    <title>Title</title>
 </head>
 <body>
-    <p><td><a href="/news/create/">Создать пост</a></td></p>
-    <p></p>
+    <td><a href="/community/{{group.id}}/create">Создать пост</a></td>
+    <p>{{group.name}}</p>
+    <p>{{ group.description }}</p>
     {% for n in news %}
-        {% if n.group == None %}
+        {% if n.group == group %}
             {% if n.sender != None %}
                 <p><strong>{{n.sender}}</strong></p>
             {% else %}

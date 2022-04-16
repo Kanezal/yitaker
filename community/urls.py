@@ -3,8 +3,10 @@ from django.urls import path, re_path
 from .views import *
 
 urlpatterns = [
-    # path('', имя_функции, name='имя_для_вызова'),
+    path('', groups),
+    path('<int:id>', view_group, name="view_group"),
+    path('create/', create_new_group, name="create_new_group"),
+    path('<int:id>/create', create_new_novelty)
 ]
 
-# Имя для вызова это сокращенное название функции, то есть должен отражаться
-# основной смысл view-функции.
+

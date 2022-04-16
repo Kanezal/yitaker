@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p><td><a href="/community/create/">Создать группу</a></td></p>
+    {% for group in groups %}
+        <td><a href="/community/{{group.id}}">{{group.name}}</a></td>
+        <p>{{ group.description }}</p>
+        <p></p>
+    {% endfor %}
+</body>
+</html>

@@ -8,7 +8,6 @@ from .views import *
 urlpatterns = [
     path('', new),
     path('<int:id>', view_new_page, name="view_new_page"),
-    path('create/', create_new_novelty, name="create_new_novelty"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

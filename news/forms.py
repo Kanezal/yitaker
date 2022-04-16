@@ -29,7 +29,7 @@ class AddNoveltyForm(forms.Form):
         widget=forms.Textarea(
             attrs={
                 'class': 'form-control',
-                'style': 'height:500px'
+                # 'style': 'height:500px'
             }
         )
     )

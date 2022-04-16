@@ -13,18 +13,7 @@
     <title>Title</title>
 </head>
 <body>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{addform.sender.label}}: {{ addform.sender }}
-        <p></p>
-        {{addform.name_new.label}}: {{addform.name_new}}
-        <p></p>
-        {{addform.text.label}}: {{addform.text}}
-        <p></p>
-        {{addform.picture.label}}: {{addform.picture}}
-        <p></p>
-        <button type="submit">Создать пост</button>
-    </form>
+    
 
 </body>
 </html>

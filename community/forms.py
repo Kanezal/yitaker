@@ -35,23 +35,3 @@ class AddGroupForm(forms.Form):
     )
 
 
-class AddInGroupForm(forms.Form):
-    user = forms.CharField(
-        label='Пользователь',
-        max_length=200,
-        widget=forms.TextInput(
-            attrs={
-                'class': 'form-control'
-            }
-        )
-    )
-    group = forms.CharField(
-        label='Группа',
-        max_length=20,
-        widget=forms.TextInput(
-            attrs={
-                'class': 'form-control',
-                'disabled': '',
-            }
-        ),
-    )

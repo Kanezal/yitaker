@@ -5,9 +5,17 @@
     <title>Title</title>
 </head>
 <body>
-    <td><a href="/community/{{group.id}}/create">Создать пост</a></td>
+    <p><button  onclick="window.location='/community/{{group.id}}/create' ">Создать пост</button></p>
     <p>{{group.name}}</p>
     <p>{{ group.description }}</p>
+
+    {% if existance == False %}
+        <p><button  onclick="window.location='{{group.id}}/add' ">Вступить в группу</button></p>
+    {% else %}
+        <p><button  onclick="window.location='{{group.id}}/delete' ">Выйти из группы</button></p>
+    {% endif %}
+
+
     {% for n in news %}
         {% if n.group == group %}
             {% if n.sender != None %}

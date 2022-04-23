@@ -5,7 +5,6 @@ import datetime
 from django.contrib import messages
 from django.shortcuts import redirect
 from news.forms import AddNoveltyForm
-from .forms import AddInGroupForm
 from news.models import Novelty
 from .models import ExistenceInGroup
 
@@ -45,11 +44,17 @@ def view_group(request, id):
     group = Community.objects.get(id=id)
     news = Novelty.objects.all()
 
+    e = ExistenceInGroup.objects.filter(user=request.user, group=Community.objects.get(id=id))
+    existance = False
+
+    if str(e) != "<QuerySet []>":
+        existance = True
+
     ctx = {
         'group': group,
         'news': news,
+        'existance': existance,
     }
-
 
     return render(request, 'view_group.html', context=ctx)
 
@@ -108,3 +113,30 @@ def create_new_novelty(request, id):
                 }
             )
     return render(request, 'create_new_novelty.html', context)
+
+
+def view_my_communities(request):
+    all_communities = ExistenceInGroup.objects.all()
+    my_communities = []
+    for community in all_communities:
+        if community.user == request.user:
+            my_communities.append(community.group)
+
+    ctx = {
+        'groups': my_communities,
+    }
+
+    return render(request, 'view_my_communities.html', ctx)
+
+
+def add_to_group(request, id):
+    n = ExistenceInGroup(user=request.user, group=Community.objects.get(id=id))
+    n.save()
+
+    return redirect('view_group', id=id)
+
+
+def delete_from_group(request, id):
+    e = ExistenceInGroup.objects.filter(user=request.user, group=Community.objects.get(id=id)).delete()
+
+    return redirect('view_group', id=id)

@@ -15,9 +15,9 @@
     <input type="submit" value="создать">
     </form>
 
-    {% for m in chats %}
-    <p> <strong><td><a href="chats/chat{{m.id}}">{{m.title}}</a></td></strong>   {{m.user_creator}}</p>
-    {% endfor %}
+    {% for chat in chats %}
+    <p> <strong><td><a href="chats/chat/{{chat.id}}">{{chat.title}}</a></td></strong>   {{chat.user_creator}} </p>
+    {% endfor %} 
     
 
 </body>

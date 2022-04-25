@@ -12,6 +12,11 @@ class AddGroupForm(forms.Form):
             }
         )
     )
+
+    icon = forms.ImageField(
+        label="Иконка сообщества"
+    )
+
     creater = forms.CharField(
         label='Пользователь',
         max_length=20,
@@ -23,13 +28,13 @@ class AddGroupForm(forms.Form):
         ),
         required=False
     )
+
     description = forms.CharField(
         label='Описание',
         max_length=5000,
         widget=forms.Textarea(
             attrs={
                 'class': 'form-control',
-                'style': 'height:500px'
             }
         )
     )

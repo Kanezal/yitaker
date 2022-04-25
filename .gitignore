@@ -351,3 +351,12 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/django,pycharm,python
 .idea/
+community/migrations/__pycache__/__init__.cpython-310.pyc
+community/migrations/__pycache__/0001_initial.cpython-310.pyc
+news/migrations/__pycache__/__init__.cpython-310.pyc
+news/migrations/__pycache__/0001_initial.cpython-310.pyc
+news/migrations/__pycache__/0002_novelty_datetime.cpython-310.pyc
+news/migrations/__pycache__/0003_remove_novelty_pictures_novelty_picture.cpython-310.pyc
+news/migrations/__pycache__/0004_remove_novelty_wall_id_novelty_group_id_and_more.cpython-310.pyc
+news/migrations/__pycache__/0005_rename_group_id_novelty_group_and_more.cpython-310.pyc
+news/migrations/__pycache__/0006_novelty_name_new.cpython-310.pyc

@@ -43,7 +43,7 @@ def messages(request, id):
                 'messages' : all_messages,
                 'form' : form,
                 'has_errors': has_errors,
-                'title' : Chat.objects.filter(id=id)
+                'title' : Chat.objects.get(id=id).title
             }
             return render(request, 'messages.html', context = ctx)
 

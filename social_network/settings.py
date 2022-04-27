@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'messenger',
     'search',
     'user_profile',
+    'registration',
 ]
 
 MIDDLEWARE = [
@@ -62,13 +63,9 @@ ROOT_URLCONF = 'social_network.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-<<<<<<< social_network/settings.py
-        'DIRS': ['templates'],
-=======
         'DIRS': [
             'templates',
         ],
->>>>>>> social_network/settings.py
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

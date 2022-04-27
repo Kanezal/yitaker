@@ -31,6 +31,7 @@ urlpatterns = [
     path('messenger/', include('messenger.urls')),
     path('community/', include('community.urls')),
     path('friends/', include('friends.urls')),
+    path('registration/', include('registration.urls')),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
 ]

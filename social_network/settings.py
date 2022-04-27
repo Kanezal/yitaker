@@ -37,12 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'bootstrap5',
     'news',
     'community',
     'friends',
-    'news',
-    'community',
     'messenger',
     'search',
     'user_profile',
@@ -63,9 +62,13 @@ ROOT_URLCONF = 'social_network.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< social_network/settings.py
+        'DIRS': ['templates'],
+=======
         'DIRS': [
             'templates',
         ],
+>>>>>>> social_network/settings.py
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

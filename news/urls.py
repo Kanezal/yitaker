@@ -1,10 +1,11 @@
 from django.urls import path, re_path
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 from .views import *
 
 urlpatterns = [
-    # path('', имя_функции, name='имя_для_вызова'),
-]
-
-# Имя для вызова это сокращенное название функции, то есть должен отражаться
-# основной смысл view-функции.
+    path('', new),
+    path('<int:id>', view_new_page, name="view_new_page"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

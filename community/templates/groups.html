@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Сообщества</title>
+{% endblock %}
+
+
+{% block main %}
+{% for group in groups %}
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-2">
+            {% if group.icon != "No image" %}
+                <img src="{{ group.icon }}" class="img-fluid rounded-circle" alt="Изображение"
+                    style="max-width: 100px; max-height: 100px">
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{group.name}}</h5>
+                <p class="card-text">{{ group.description }}</p>
+
+                <a href="/community/{{group.id}}" class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

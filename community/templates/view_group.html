@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p><button  onclick="window.location='/community/{{group.id}}/create' ">Создать пост</button></p>
+    <p>{{group.name}}</p>
+    <p>{{ group.description }}</p>
+
+    {% if existance == False %}
+        <p><button  onclick="window.location='{{group.id}}/add' ">Вступить в группу</button></p>
+    {% else %}
+        <p><button  onclick="window.location='{{group.id}}/delete' ">Выйти из группы</button></p>
+    {% endif %}
+
+
+    {% for n in news %}
+        {% if n.group == group %}
+            {% if n.sender != None %}
+                <p><strong>{{n.sender}}</strong></p>
+            {% else %}
+                <p><strong>Аноним</strong></p>
+            {% endif %}
+            <td><a href="/news/{{n.id}}">{{n.name_new}}</a></td>
+            <p>{{ n.text }}</p>
+            <p></p>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>

@@ -10,8 +10,10 @@
 <div class="card mb-3">
     <div class="row g-0">
         <div class="col-md-2">
-            <img src="{{ group.icon }}" class="img-fluid rounded-circle" alt="Изображение"
-                style="max-width: 100px; max-height: 100px">
+            {% if group.icon != "No image" %}
+                <img src="{{ group.icon }}" class="img-fluid rounded-circle" alt="Изображение"
+                    style="max-width: 100px; max-height: 100px">
+            {% endif %}
         </div>
         <div class="col-md-8">
             <div class="card-body">

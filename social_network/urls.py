@@ -21,6 +21,7 @@ from search.urls import *
 from news.urls import *
 from messenger.urls import *
 from community.urls import *
+from friends.urls import *
 
 urlpatterns = [
     path('profile/', include('user_profile.urls')),
@@ -29,5 +30,6 @@ urlpatterns = [
     path('search/', include('search.urls')),
     path('messenger/', include('messenger.urls')),
     path('community/', include('community.urls')),
+    path('friends/', include('friends.urls')),
     path('admin/', admin.site.urls),
 ]

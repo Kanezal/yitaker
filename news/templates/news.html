@@ -1,70 +1,57 @@
-<!DOCTYPE html>
-<html lang="ru">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Новости</title>
+{% load bootstrap5 %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-        crossorigin="anonymous"></script>
+{% block head %}
+<title>Новости</title>
+{% endblock %}
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-</head>
 
-<body>
-    <div class="card mx-auto text-dark bg-light mb-3 mt-3" , style="max-width: 700px;">
-        <div class="card-body">
-            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
-                aria-expanded="false" aria-controls="collapseExample">
-                Добавить пост
-            </a>
-            <div class="collapse" id="collapseExample">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{addform.sender.label}}: {{ addform.sender }}
-                    <p></p>
-                    {{addform.name_new.label}}: {{addform.name_new}}
-                    <p></p>
-                    {{addform.text.label}}: {{addform.text}}
-                    <p></p>
-                    {{addform.picture.label}}: {{addform.picture}}
-                    <p></p>
-                    <button type="submit">Создать пост</button>
-                </form>
-            </div>
+{% block main %}
+<div class="card mx-auto text-dark bg-light mb-3 mt-3" , style="max-width: 700px;">
+    <div class="card-body">
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+            aria-controls="collapseExample">
+            Добавить пост
+        </a>
+        <div class="collapse mt-3" id="collapseExample">
+            <form method="post" enctype="multipart/form-data">
+                {% for field in form %}
+                {% if field.name != "picture" %}
+                {% bootstrap_field field show_label=False %}
+                {% else %}
+                {% bootstrap_field field %}
+                {% endif %}
+                {% endfor %}
+
+                {% bootstrap_button button_type="submit" button_class="btn-success" content="Создать пост" %}
+            </form>
         </div>
     </div>
+</div>
 
-    <hr class="mx-auto" style="max-width: 700px;">
+<hr class="mx-auto" style="max-width: 700px;">
 
-    {% for new in news %}
-    {% if new.group == None %}
-    <div class="card mx-auto text-dark bg-light mb-3" style="max-width: 700px;">
-        <h5 class="card-header">
-            Новость от: 
-            {% if new.sender != None %}
-            {{new.sender}}
-            {% else %}
-            Аноним
-            {% endif %}
+{% for new in news %}
+{% if new.group == None %}
+<div class="card mx-auto text-dark bg-light mb-3" style="max-width: 700px;">
+    <h5 class="card-header">
+        Новость от:
+        {{new.sender}}
+    </h5>
+    <div class="card-body">
+        <h5 class="card-title">
+            {{ new.name_new }}
         </h5>
-        <div class="card-body">
-            <h5 class="card-title">
-                {{ new.name_new }}
-            </h5>
-            <p class="card-text">{{ new.text }}</p>
-        </div>
-        {% if new.picture != None %}
-        <img class="card-img-bottom" src="{{ new.picture }}" alt="">
-        <div class="card-footer">
-            {{new.datetime}}
-        </div>
-        {% endif %}
+        <p class="card-text">{{ new.text }}</p>
+    </div>
+    {% if new.picture != None %}
+    <img class="card-img-bottom" src="{{ new.picture }}" alt="">
+    <div class="card-footer">
+        {{new.datetime}}
     </div>
     {% endif %}
-    {% endfor %}
-</body>
-
-</html>
+</div>
+{% endif %}
+{% endfor %}
+{% endblock %}

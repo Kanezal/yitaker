@@ -32,20 +32,15 @@ def new(request):
             record = Novelty(
                 name_new=addform.data['name_new'],
                 text=addform.data['text'],
-                sender=request.user if request.user.is_authenticated else None,
+                sender=request.user,
                 picture=request.FILES['picture'],
                 datetime=datetime.datetime.now(),
             )
             record.save()
-            id = record.id
             messages.add_message(request, messages.SUCCESS, "Пост успешно создан")
         else:
             messages.add_message(request, messages.ERROR, "Некорректные данные")
     else:
-        context['addform'] = AddNoveltyForm(
-            initial={
-                'sender': request.user if request.user.is_authenticated else "Аноним",
-            }
-        )
+        context['form'] = AddNoveltyForm()
     
     return render(request, 'news.html', context)

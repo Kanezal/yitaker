@@ -12,13 +12,13 @@ def base_ctx() -> dict:
     return {
         "nav": {
             "Создать сообщество": {
-                "link": "/community/create/"
+                "link": "create/"
             },
             "Мои сообщества": {
-                "link": "/community/my_communities/"
+                "link": "my_communities/"
             },
             "Все сообщества": {
-                "link": "/community/"
+                "link": ""
             }
         }
     }
@@ -34,8 +34,8 @@ def create_new_group(request):
             if request.user.is_authenticated:
                 record = Community(
                     name=addform.data['name'],
-                    icon=addform.cleaned_data['icon'],
-                    description=addform.data['description'],
+                    icon=addform.cleaned_data['icon'] if addform.cleaned_data['icon'] else 'static/images/community_icons/no_img.png',
+                    description=addform.cleaned_data['description'],
                     creater=request.user,
                     datetime=datetime.datetime.now(),
                 )
@@ -47,12 +47,8 @@ def create_new_group(request):
             messages.add_message(request, messages.ERROR, "Некорректные данные")
             return redirect('create_new_group')
     else:
-        if request.user.is_authenticated:
-            context['addform'] = AddGroupForm(
-                initial={
-                    'creater': request.user,
-                }
-            )
+        context['form'] = AddGroupForm()
+    
     return render(request, 'create_new_group.html', context)
 
 
@@ -61,6 +57,22 @@ def view_group(request, id):
 
     group = Community.objects.get(id=id)
     news = Novelty.objects.all()
+
+    if request.method == 'POST':
+        addform = AddNoveltyForm(request.POST, request.FILES)
+
+        if addform.is_valid():
+            record = Novelty(
+                name_new=addform.cleaned_data['name_new'],
+                text=addform.cleaned_data['text'],
+                sender=request.user,
+                picture=request.FILES['picture'],
+                datetime=datetime.datetime.now(),
+                group=group,
+            )
+            record.save()
+    else:
+        ctx['form'] = AddNoveltyForm()
 
     e = ExistenceInGroup.objects.filter(user=request.user, group=Community.objects.get(id=id))
     existance = False
@@ -93,55 +105,31 @@ def create_new_novelty(request, id):
         addform = AddNoveltyForm(request.POST, request.FILES)
 
         if addform.is_valid():
-            if request.user.is_authenticated:
-                record = Novelty(
-                    name_new=addform.data['name_new'],
-                    text=addform.data['text'],
-                    sender=request.user,
-                    picture=request.FILES['picture'],
-                    datetime=datetime.datetime.now(),
-                    group=group,
-                )
-            else:
-                record = Novelty(
-                    name_new=addform.data['name_new'],
-                    text=addform.data['text'],
-                    picture=request.FILES['picture'],
-                    datetime=datetime.datetime.now(),
-                )
+            record = Novelty(
+                name_new=addform.cleaned_data['name_new'],
+                text=addform.cleaned_data['text'],
+                sender=request.user,
+                picture=request.FILES['picture'],
+                datetime=datetime.datetime.now(),
+                group=group,
+            )
             record.save()
-            id = record.id
-            messages.add_message(request, messages.SUCCESS, "Пост успешно создан")
-            return redirect('view_new_page', id=id)
-        else:
-            messages.add_message(request, messages.ERROR, "Некорректные данные")
-            return redirect('create_new_novelty')
     else:
-        if request.user.is_authenticated:
-            context['addform'] = AddNoveltyForm(
-                initial={
-                    'sender': request.user,
-                }
-            )
-        else:
-            context['addform'] = AddNoveltyForm(
-                initial={
-                    'sender': 'Аноним',
-                }
-            )
+        context['addform'] = AddNoveltyForm()
+    
     return render(request, 'create_new_novelty.html', context)
 
 
 def view_my_communities(request):
+    ctx= base_ctx()
+
     all_communities = ExistenceInGroup.objects.all()
     my_communities = []
     for community in all_communities:
         if community.user == request.user:
             my_communities.append(community.group)
 
-    ctx = {
-        'groups': my_communities,
-    }
+    ctx['groups'] = my_communities
 
     return render(request, 'view_my_communities.html', ctx)
 

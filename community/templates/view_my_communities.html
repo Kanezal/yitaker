@@ -1,15 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <p><button  onclick="window.location='/community/create/' ">Создать группу</button></p>
-    {% for group in groups %}
-        <p><td><a href="/community/{{group.id}}">{{ group.name }}</a></td></p>
+{% extends 'base.html' %}
 
-    {% endfor %}
+{% load bootstrap5 %}
 
-</body>
-</html>
+{% block head %}
+<title>Мои сообщества</title>
+{% endblock %}
+
+
+{% block main %}
+{% for group in groups %}
+<div class="d-flex position-relative">
+    <div class="flex-shrink-0">
+        <img src="/{{ group.icon }}" class="rounded-circle" alt="Изображение"
+            style="object-fit: cover; width: 100px; height: 100px;">
+    </div>
+    <div class="flex-grow-1 ms-3">
+        <h5 class="card-title">{{group.name}}</h5>
+        <p class="card-text">{{ group.description }}</p>
+
+        <a href="/community/{{group.id}}" class="stretched-link"></a>
+    </div>
+</div>
+<hr>
+{% endfor %}
+{% endblock %}

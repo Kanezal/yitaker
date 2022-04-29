@@ -7,10 +7,16 @@
 {% endblock %}
 
 {% block main %}
-<form method="post" enctype="multipart/form-data">
+<form method="post">
     {% csrf_token %}
 
-    {% bootstrap_form addform %}
+    {% for field in form %}
+    {% if field.name != "icon" %}
+    {% bootstrap_field field show_label=False %}
+    {% else %}
+    {% bootstrap_field field %}
+    {% endif %}
+    {% endfor %}
 
     {% bootstrap_button button_type="submit" button_class="btn-success" content="Создать группу" %}
 </form>

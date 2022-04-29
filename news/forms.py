@@ -12,17 +12,7 @@ class AddNoveltyForm(forms.Form):
             }
         )
     )
-    sender = forms.CharField(
-        label='Пользователь',
-        max_length=20,
-        widget=forms.TextInput(
-            attrs={
-                'class': 'form-control',
-                'disabled': '',
-            }
-        ),
-        required=False
-    )
+
     text = forms.CharField(
         label='Текст',
         max_length=5000,
@@ -33,11 +23,9 @@ class AddNoveltyForm(forms.Form):
             }
         )
     )
+
     picture = forms.ImageField(
-        label='Изображение'
-    )
-    group = forms.IntegerField(
-        label='Группа',
+        label='Изображение',
         required=False,
     )
 

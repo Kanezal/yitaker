@@ -10,4 +10,13 @@ class MessageForm(forms.Form):
 
 class ChatForm(forms.Form):
     title = forms.CharField(max_length = 25, label = 'Чат')
-    all_users = forms.ChoiceField(choices=((1, "English"), (2, "German"), (3, "French")))
+
+    users = User.objects.all()
+    users_list = []
+    for user in users:
+        users_list.append([user.id, user.username])
+
+    all_users = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple,
+        choices=users_list
+    )

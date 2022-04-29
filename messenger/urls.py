@@ -6,7 +6,8 @@ urlpatterns = [
     # path('', имя_функции, name='имя_для_вызова'),
     path('chats/chat/<int:id>', messages),
     path('chats', chats),
-    path('chats/delete<int:id>', delete)
+    path('chats/delete<int:id>', delete),
+    path('chats/create', create),
 ]
 
 # Имя для вызова это сокращенное название функции, то есть должен отражаться

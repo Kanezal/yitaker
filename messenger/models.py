@@ -22,6 +22,7 @@ class GroupChat:
     title = models.CharField(max_length = 25)# заголовок чата, его название
     icons = models.FileField() # иконка чата
     date_of_creation = models.DateTimeField(auto_now_add = True) # время создания
+    all_users = []
 class ChatUser(models.Model):
     chat_id = models.ForeignKey(to = Chat, on_delete = models.SET_NULL, null=True)
     user_id = models.ForeignKey(to = User, on_delete = models.SET_NULL, null=True)

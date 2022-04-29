@@ -83,3 +83,28 @@ def delete(request, id):
     message.save()
     return redirect(f"chat/{message.chat_id.id}")
 #request.GET.get('id')
+
+def create(request):
+    has_errors = False
+
+    if request.method == 'POST': 
+        form = ChatForm(request.POST)
+        if form.is_valid():
+            new_chat = Chat(
+            title = form.cleaned_data['title'],
+            user_creator = request.user,
+            date_of_creation = datetime.datetime.now(),
+            )
+            new_chat.save()
+
+        else:
+            has_errors = True
+    else:
+        form = ChatForm()
+
+    ctx = {
+        'has_errors' : has_errors,
+        'form' : form,
+    }
+
+    return render(request, 'create.html', context = ctx)

@@ -60,7 +60,6 @@ def chats(request):
             date_of_creation = datetime.datetime.now(),
             )
             chat_el.save()
-
         else:
             has_errors = True
     else:
@@ -97,6 +96,16 @@ def create(request):
             )
             new_chat.save()
 
+            all_users = form.cleaned_data["all_users"]
+            if request.user.id not in all_users:
+                all_users.append(request.user.id)
+
+            for user_id in all_users:
+                chat_user = ChatUser(
+                    chat_id = Chat.objects.get(id=new_chat.id),
+                    user_id = User.objects.get(id=user_id),
+                )
+                chat_user.save()
         else:
             has_errors = True
     else:

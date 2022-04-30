@@ -102,6 +102,7 @@ def create(request):
             new_chat.save()
 
             all_users = form.cleaned_data["all_users"]
+            
             if str(request.user.id) not in all_users:
                 all_users.append(request.user.id)
 

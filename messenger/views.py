@@ -47,6 +47,8 @@ def messages(request, id):
             }
             return render(request, 'messages.html', context = ctx)
 
+    
+
 
 def chats(request):
     has_errors = False
@@ -59,18 +61,20 @@ def chats(request):
             user_creator = request.user,
             date_of_creation = datetime.datetime.now(),
             )
-            chat_el.save()
-
+            chat_el.save() 
         else:
             has_errors = True
     else:
         form = ChatForm()
 
-    all_chats =Chat.objects.all().order_by('-date_of_creation')
-
+    chats_users = ChatUser.objects.filter(user_id = request.user)
+    all_chat_list = []
+    for chat_user in chats_users:
+        all_chat_list.append(chat_user.chat_id)
+    print(all_chat_list)
 
     ctx = {
-        'chats' : all_chats,
+        'chats' : all_chat_list,
         'form' : form,
         'has_errors': has_errors,
     }
@@ -82,7 +86,7 @@ def delete(request, id):
     message.isVisible_all_users = False
     message.save()
     return redirect(f"chat/{message.chat_id.id}")
-#request.GET.get('id')
+
 
 def create(request):
     has_errors = False
@@ -97,6 +101,16 @@ def create(request):
             )
             new_chat.save()
 
+            all_users = form.cleaned_data["all_users"]
+            if str(request.user.id) not in all_users:
+                all_users.append(request.user.id)
+
+            for user_id in all_users:
+                chat_user = ChatUser(
+                    chat_id = Chat.objects.get(id=new_chat.id),
+                    user_id = User.objects.get(id=user_id),
+                )
+                chat_user.save()
         else:
             has_errors = True
     else:
@@ -106,5 +120,8 @@ def create(request):
         'has_errors' : has_errors,
         'form' : form,
     }
+
+    if request.POST.get('chats'):
+        return redirect('chats')
 
     return render(request, 'create.html', context = ctx)

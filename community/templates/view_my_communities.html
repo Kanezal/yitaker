@@ -11,7 +11,7 @@
 {% for group in groups %}
 <div class="d-flex position-relative">
     <div class="flex-shrink-0">
-        <img src="/{{ group.icon }}" class="rounded-circle" alt="Изображение"
+        <img src="{{ group.icon.url }}" class="rounded-circle" alt="Изображение"
             style="object-fit: cover; width: 100px; height: 100px;">
     </div>
     <div class="flex-grow-1 ms-3">

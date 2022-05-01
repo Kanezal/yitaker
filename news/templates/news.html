@@ -46,7 +46,7 @@
         <p class="card-text">{{ new.text }}</p>
     </div>
     {% if new.picture != None %}
-    <img class="card-img-bottom" src="{{ new.picture }}" alt="">
+    <img class="card-img-bottom" src="{{ new.picture.url }}" alt="">
     <div class="card-footer">
         {{new.datetime}}
     </div>

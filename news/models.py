@@ -9,7 +9,7 @@ class Novelty(models.Model):
     group = models.ForeignKey(to=Community, on_delete=models.SET_NULL, null=True)
     name_new = models.CharField(max_length=100)
     text = models.CharField(max_length=3000)
-    picture = models.ImageField(upload_to='static/images/users/%Y/%m/%d/', blank=True)
+    picture = models.ImageField(upload_to='static/images/novelty/%Y/%m/%d/', blank=True)
     datetime = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
 

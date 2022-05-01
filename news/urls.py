@@ -8,4 +8,4 @@ from .views import *
 urlpatterns = [
     path('', new),
     path('<int:id>', view_new_page, name="view_new_page"),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]

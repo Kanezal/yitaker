@@ -13,6 +13,5 @@ urlpatterns = [
     path('<int:id>/add', add_to_group),
     path('<int:id>/delete', delete_from_group),
     path('my_communities/', view_my_communities),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+]
 

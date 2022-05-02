@@ -1,20 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile Page</title>
-</head>
-<body>
-    <div>
-        <form method="POST">
-            {% csrf_token %}
-            {% for f in form %}
-                {{f.label}}</br>
-                {{f}}</br>
-            {% endfor %}
-            </br>
-            <input type="submit" value="Сохранить">
-        </form>
-    <div>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+
+{% block main %}
+<div class="row" id="app">
+    <div class="col">
+        <div class="card" style="width: 18rem;">
+            <img src="{{ user.profile.img.url }}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+                <p class="card-text">
+                    Some quick example text to build on the card title and make up the bulk of the card's content.
+                </p>
+                <a id="add_friend" href="#" class="btn btn-primary" @click="addFriend">[[ friendButtonContent ]]</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">Column</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    'use strict';
+
+    const v = new Vue({
+        el: "#app",
+        delimiters: ['[[', ']]'],
+        data: {
+            friendButtonContent: "",
+        },
+
+        methods: {
+            addFriend() {
+                axios({
+                    method: 'get',
+                    url: '/api/add_friend/{{ user.id }}'
+                }).then(response => {
+                    this.friendsData = response.data
+                    if (this.friendsData.success | !this.friendsData.is_friends) {
+                        this.friendButtonContent = "Заявка отправленна."
+                    } else {
+                        this.friendButtonContent = "Друзья"
+                    }
+                });
+            },
+            isFriendCheck() {
+                axios({
+                    method: 'get',
+                    url: '/api/is_friend/{{ user.id }}'
+                }).then(response => {
+                    this.friendReq = response.data.friendReq
+                    this.isFriend = response.data.isFriend
+
+                    if (this.isFriend) {
+                        this.friendButtonContent = "Друзья"
+                    } else if (this.friendReq) {
+                        this.friendButtonContent = "Заявка отправленна"
+                    } else {
+                        this.friendButtonContent = "Отправить заявку"
+                    }
+                });
+            }
+        },
+
+        mounted() {
+            this.isFriendCheck()
+        },
+    })
+</script>
+{% endblock %}

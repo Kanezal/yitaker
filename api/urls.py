@@ -6,7 +6,8 @@ from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
-    path('<int:id>', profile),
+    path('add_friend/<int:id>', AddFriend.as_view()),
+    path('is_friend/<int:id>', IsFriend.as_view()),
 ]
 
 # Имя для вызова это сокращенное название функции, то есть должен отражаться

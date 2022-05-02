@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-
-# Create your views here.
+from django.contrib.auth.models import User
 from friends.models import Friends
+
 
 def my_friends(request):
     f1 = Friends.objects.filter(user1=request.user, user2_confirmation=True)
@@ -11,7 +11,6 @@ def my_friends(request):
         'f2': f2,
     }
     return render(request, 'friends.html', ctx)
-
 
 
 def add_to_friends(request, id):
@@ -25,5 +24,3 @@ def add_to_friends(request, id):
 
     f.save()
     return redirect('profile')
-
-

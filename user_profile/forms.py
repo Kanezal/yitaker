@@ -1,23 +1,18 @@
 from django import forms
+from .models import Profile
 
-class ProfileForm(forms.Form):
-    city =                  forms.CharField(label='Город', max_length=300, required=False)
-    other_socnet =          forms.CharField(label='Другие соцсети', max_length=300, required=False)
-    career =                forms.CharField(label='Вид деятельности', max_length=300, required=False)
-    interests =             forms.CharField(label='Интересы', max_length=300, required=False)
-    favorite_musics =       forms.CharField(label='Любимая музыка', max_length=300, required=False)
-    favorite_movies =       forms.CharField(label='Любимые фильмы', max_length=300, required=False)
-    favorite_TVshows =      forms.CharField(label='Любимые телешоу', max_length=300, required=False)
-    favorite_books =        forms.CharField(label='Любимые книги', max_length=300, required=False)
-    favorite_games =        forms.CharField(label='Любимые игры', max_length=300, required=False)
-    favorite_quotes =       forms.CharField(label='Любимые цитаты', max_length=300, required=False)
-    status =                forms.CharField(label='Статус', max_length=300, required=False)
-    about_me =              forms.CharField(label='О себе', max_length=300, required=False)
-    life_position =         forms.CharField(label='Жизненная позиция', max_length=300, required=False)
-    political_preferences = forms.CharField(label='Политические предпочтения', max_length=300, required=False)
-    world_outlook =         forms.CharField(label='Мировозрение', max_length=300, required=False)
-    main_in_life =          forms.CharField(label='Главное в жизни', max_length=300, required=False)
-    main_in_people =        forms.CharField(label='Главное в людях', max_length=300, required=False)
-    attitude_to_smoking =   forms.CharField(label='Отношение к курению', max_length=300, required=False)
-    attitude_to_alcohol =   forms.CharField(label='Отношение к алкоголю', max_length=300, required=False)
-    inspires =              forms.CharField(label='Вдохновляет', max_length=300, required=False)
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = [
+            'city', 'other_socnet', 'career',
+            'interests', 'favorite_musics',
+            'favorite_movies', 'favorite_movies',
+            'favorite_TVshows', 'favorite_books',
+            'favorite_games', 'favorite_quotes',
+            'status', 'about_me', 'life_position',
+            'political_preferences', 'world_outlook',
+            'world_outlook', 'main_in_life', 
+            'attitude_to_smoking', 'attitude_to_alcohol',
+            'inspires',
+        ]

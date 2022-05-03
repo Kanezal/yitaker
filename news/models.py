@@ -5,7 +5,7 @@ from community.models import Community
 
 
 class Novelty(models.Model):
-    sender = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
+    sender = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True, related_name="news")
     group = models.ForeignKey(to=Community, on_delete=models.SET_NULL, null=True)
     name_new = models.CharField(max_length=100)
     text = models.CharField(max_length=3000)

@@ -6,11 +6,11 @@
 </head>
 <body>
     {% for friend in f1 %}
-       <p><a href="/{{ friend.user2.id }}"> {{ friend.user2.username }}</a></p>
+       <p><a href="/profile/{{ friend.user2.id }}"> {{ friend.user2.username }}</a></p>
     {% endfor %}
 
     {% for friend in f2 %}
-        <p><a href="/{{ friend.user1.id }}"> {{ friend.user1.username }}</a></p>
+        <p><a href="/profile/{{ friend.user1.id }}"> {{ friend.user1.username }}</a></p>
     {% endfor %}
 
 </body>

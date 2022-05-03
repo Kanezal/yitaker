@@ -43,12 +43,7 @@
     {% if new.group == None %}
     <div class="card mx-auto text-dark bg-light mb-3" style="max-width: 700px;">
         <h5 class="card-header">
-            Новость от: 
-            {% if new.sender != None %}
             {{new.sender}}
-            {% else %}
-            Аноним
-            {% endif %}
         </h5>
         <div class="card-body">
             <h5 class="card-title">

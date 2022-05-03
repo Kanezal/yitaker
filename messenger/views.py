@@ -1,10 +1,8 @@
 from .models import ChatUser, Message, Chat
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse
-from django.views.generic import CreateView
 from django.core.exceptions import ObjectDoesNotExist
 from .forms import *
-from django.urls import reverse_lazy
 import datetime
 
 
@@ -82,10 +80,12 @@ def chats(request):
     return render(request, 'chats.html', context = ctx)
 
 def delete(request, id):
-    message = Message.objects.get(id=id)
-    message.isVisible_all_users = False
-    message.save()
-    return redirect(f"chat/{message.chat_id.id}")
+    if request.user == Message.objects.get(id=id).user_sender:
+        message = Message.objects.get(id=id)
+        message.isVisible_all_users = False
+        message.save()
+        return redirect(f"chat/{message.chat_id.id}") 
+    return HttpResponse("<h1>ну это бан</h1>")
 
 
 def create(request):

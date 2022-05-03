@@ -25,12 +25,13 @@
 
             <div>
                 {% for message in messages %}
-                <p><strong>{{message.user_sender}}</strong> {{message.text}}
+                <p>
+                    <strong>{{message.user_sender}}</strong> {{message.text}}
                     {{message.date_receipt.hour}}:{{message.date_receipt.minute}}
                     {% if request.user == message.user_sender %}
                     <button onclick="window.location.href = '/messenger/chats/delete{{message.id}}'"
                         class="btn btn-danger btn-sm">удалить</button>
-                {% endif %}
+                    {% endif %}
                 </p>
                 {% endfor %}
             </div>

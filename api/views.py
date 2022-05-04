@@ -1,19 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.contrib.auth.models import User
 from friends.models import Friends
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
-
-def my_friends(request):
-    f1 = Friends.objects.filter(user1=request.user, user2_confirmation=True)
-    f2 = Friends.objects.filter(user2=request.user)
-    ctx = {
-        'f1': f1,
-        'f2': f2,
-    }
-    return render(request, 'friends.html', ctx)
 
 
 def is_friends(user1, user2) -> bool:

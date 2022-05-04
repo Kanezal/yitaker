@@ -16,6 +16,7 @@
         </a>
         <div class="collapse mt-3" id="collapseExample">
             <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
                 {% for field in form %}
                 {% if field.name != "picture" %}
                 {% bootstrap_field field show_label=False %}

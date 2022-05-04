@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+
+{% block main %}
+<div class="row" id="app">
+    <div class="col">
+        <div class="card" style="width: 18rem;">
+            <img src="{{ user.profile.img.url }}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+                <p class="card-text">
+                    Some quick example text to build on the card title and make up the bulk of the card's content.
+                </p>
+                {% if user != request.user %}
+                <a id="add_friend" class="btn btn-primary" @click="friendButtonClick">[[ friendButtonContent ]]</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        {% for new in user.news.all %}
+        <div class="card mx-auto text-dark bg-light mb-3" style="max-width: 700px;">
+            <h5 class="card-header">
+                <div class="d-flex justify-content-evenly align-items-center">
+                    <div class="mr-2">
+                        <img class="rounded-circle" width="45" height="45" src="{{ user.profile.img.url }}" alt="">
+                    </div>
+                    <div class="ml-2">
+                        <div class="h5 m-0">{{new.sender}}</div>
+                        <div class="h7 text-muted">{{new.datetime}}</div>
+                    </div>
+                </div>
+            </h5>
+            <div class="card-body">
+                <h5 class="card-title">
+                    {{ new.name_new }}
+                </h5>
+                <p class="card-text">{{ new.text }}</p>
+            </div>
+            {% if new.picture != None %}
+            <img class="card-img-bottom" src="{{ new.picture.url }}">
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    'use strict';
+
+    const v = new Vue({
+        el: "#app",
+        delimiters: ['[[', ']]'],
+        data: {
+            friendButtonContent: "",
+        },
+
+        methods: {
+            friendButtonContentChange() {
+                axios({
+                    method: 'get',
+                    url: '/friends/is_friend/{{ user.id }}'
+                }).then(response => {
+                    this.friendButtonContent =
+                        response.data.friendButtonContent
+                });
+            },
+            friendButtonClick() {
+                if (this.friendButtonContent == "Добавить в друзья") {
+                    axios({
+                        method: 'get',
+                        url: '/friends/add_friend/{{ user.id }}'
+                    }).then(response => {
+                        this.friendButtonContentChange()
+                    })
+                } else if (this.friendButtonContent == "Ответ на заявку") {
+                    axios({
+                        method: 'get',
+                        url: '/friends/accept_friend/{{ user.id }}'
+                    }).then(response => {
+                        this.friendButtonContentChange()
+                    })
+                } else if (this.friendButtonContent == "Удалить из друзей") {
+                    axios({
+                        method: 'get',
+                        url: '/friends/delete_friend/{{ user.id }}'
+                    }).then(response => {
+                        this.friendButtonContentChange()
+                    })
+                }
+            }
+        },
+
+        mounted() {
+            this.friendButtonContentChange()
+        },
+    })
+</script>
+{% endblock %}

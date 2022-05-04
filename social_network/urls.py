@@ -22,8 +22,10 @@ from news.urls import *
 from messenger.urls import *
 from community.urls import *
 from friends.urls import *
+from api.urls import *
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('profile/', include('user_profile.urls')),
     path('search/', include('search.urls')),
     path('news/', include('news.urls')),
@@ -32,6 +34,6 @@ urlpatterns = [
     path('community/', include('community.urls')),
     path('friends/', include('friends.urls')),
     path('registration/', include('registration.urls')),
-    path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
+    path('profile/', include('user_profile.urls')),
+    path('api/', include('api.urls'))
 ]

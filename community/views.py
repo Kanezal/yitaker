@@ -39,8 +39,16 @@ def create_new_group(request):
                     creater=request.user,
                     datetime=datetime.datetime.now(),
                 )
+
             record.save()
             id = record.id
+
+            record2 = ExistenceInGroup(
+                group=record,
+                user=request.user,
+            )
+            record2.save()
+
             messages.add_message(request, messages.SUCCESS, "Группа успешно создана")
             return redirect('view_group', id=id)
         else:

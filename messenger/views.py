@@ -1,11 +1,10 @@
 from .models import ChatUser, Message, Chat
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse
-from django.views.generic import CreateView
 from django.core.exceptions import ObjectDoesNotExist
 from .forms import *
-from django.urls import reverse_lazy
 import datetime
+from friends.models import Friends
 
 
 def messages(request, id): 
@@ -47,6 +46,8 @@ def messages(request, id):
             }
             return render(request, 'messages.html', context = ctx)
 
+    
+
 
 def chats(request):
     has_errors = False
@@ -59,18 +60,19 @@ def chats(request):
             user_creator = request.user,
             date_of_creation = datetime.datetime.now(),
             )
-            chat_el.save()
-
+            chat_el.save() 
         else:
             has_errors = True
     else:
-        form = ChatForm()
+        form = ChatForm(id = request.user.id)
 
-    all_chats =Chat.objects.all().order_by('-date_of_creation')
-
+    chats_users = ChatUser.objects.filter(user_id = request.user)
+    all_chat_list = []
+    for chat_user in chats_users:
+        all_chat_list.append(chat_user.chat_id)
 
     ctx = {
-        'chats' : all_chats,
+        'chats' : all_chat_list,
         'form' : form,
         'has_errors': has_errors,
     }
@@ -78,8 +80,49 @@ def chats(request):
     return render(request, 'chats.html', context = ctx)
 
 def delete(request, id):
-    message = Message.objects.get(id=id)
-    message.isVisible_all_users = False
-    message.save()
-    return redirect(f"chat/{message.chat_id.id}")
-#request.GET.get('id')
+    if request.user == Message.objects.get(id=id).user_sender:
+        message = Message.objects.get(id=id)
+        message.isVisible_all_users = False
+        message.save()
+        return redirect(f"chat/{message.chat_id.id}") 
+    return HttpResponse("<h1>ну это бан</h1>")
+
+
+def create(request):
+    
+    has_errors = False
+
+    if request.method == 'POST': 
+        form = ChatForm(request.POST, id = request.user.id)
+
+        if form.is_valid():
+            new_chat = Chat(
+            title = form.cleaned_data['title'],
+            user_creator = request.user,
+            date_of_creation = datetime.datetime.now(),
+            )
+            new_chat.save()
+
+            all_users = form.cleaned_data["option"]
+            all_users.append(request.user.id)
+
+            for user_id in all_users:
+                chat_user = ChatUser(
+                    chat_id = Chat.objects.get(id=new_chat.id),
+                    user_id = User.objects.get(id=user_id),
+                )
+                chat_user.save()
+
+            return redirect('chats')
+
+        else:
+            has_errors = True
+    else:
+        form = ChatForm(id = request.user.id)
+
+    ctx = {
+        'has_errors' : has_errors,
+        'form' : form,
+    }
+
+    return render(request, 'create.html', context = ctx)

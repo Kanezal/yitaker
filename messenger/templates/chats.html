@@ -9,11 +9,7 @@
 
     <p><strong>Chats</strong></p> 
 
-    <form method="POST">
-        {% csrf_token %}
-        {{form}}
-    <input type="submit" value="создать">
-    </form>
+    <button onclick = "window.location.href = '/messenger/chats/create'">создать новый чат</button>
 
     {% for chat in chats %}
     <p> <strong><td><a href="chats/chat/{{chat.id}}">{{chat.title}}</a></td></strong>   {{chat.user_creator}} </p>

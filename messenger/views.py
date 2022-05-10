@@ -4,6 +4,7 @@ from django.http import Http404, HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from .forms import *
 import datetime
+from friends.models import Friends
 
 
 def messages(request, id): 
@@ -63,7 +64,7 @@ def chats(request):
         else:
             has_errors = True
     else:
-        form = ChatForm()
+        form = ChatForm(id = request.user.id)
 
     chats_users = ChatUser.objects.filter(user_id = request.user)
     all_chat_list = []
@@ -89,10 +90,11 @@ def delete(request, id):
 
 
 def create(request):
+    
     has_errors = False
 
     if request.method == 'POST': 
-        form = ChatForm(request.POST)
+        form = ChatForm(request.POST, id = request.user.id)
         if form.is_valid():
             new_chat = Chat(
             title = form.cleaned_data['title'],
@@ -101,10 +103,8 @@ def create(request):
             )
             new_chat.save()
 
-            all_users = form.cleaned_data["all_users"]
-            
-            if str(request.user.id) not in all_users:
-                all_users.append(request.user.id)
+            all_users = form.cleaned_data["option"]
+            all_users.append(request.user)
 
             for user_id in all_users:
                 chat_user = ChatUser(
@@ -115,7 +115,7 @@ def create(request):
         else:
             has_errors = True
     else:
-        form = ChatForm()
+        form = ChatForm(id = request.user.id)
 
     ctx = {
         'has_errors' : has_errors,

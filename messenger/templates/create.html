@@ -10,8 +10,7 @@
 
     <form method="POST">
         {% csrf_token %}
-        {{form.title}}<br>
-        {{form.all_users}}<br>
+        {{form}}
     <input type="submit" value="создать" name = "chats">
     </form>
 </body>

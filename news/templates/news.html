@@ -34,7 +34,6 @@
 <hr class="mx-auto" style="max-width: 700px;">
 
 {% for new in news %}
-{% if new.group == None %}
 <div class="card mx-auto text-dark bg-light mb-3" style="max-width: 700px;">
     <h5 class="card-header">
         Новость от:
@@ -53,6 +52,5 @@
     </div>
     {% endif %}
 </div>
-{% endif %}
 {% endfor %}
 {% endblock %}

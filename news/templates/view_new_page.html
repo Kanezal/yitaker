@@ -1,3 +1,4 @@
+{% load bootstrap5 %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="ru">
@@ -16,6 +17,11 @@
     <p></p>
     {% if new.picture != None %}
         <img src="{{ new.picture }}" alt="">
+    {% endif %}
+    {% if is_liked %}
+        <button onclick="window.location='{{new.id}}/delete'">{{ likes }}  </button>
+    {% else %}
+        <button onclick="window.location='{{new.id}}/add'"> {{ likes }} </button>
     {% endif %}
 </body>
 </html>

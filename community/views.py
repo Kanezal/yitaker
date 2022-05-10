@@ -12,13 +12,13 @@ def base_ctx() -> dict:
     return {
         "nav": {
             "Создать сообщество": {
-                "link": "create/"
+                "link": "community/create/"
             },
             "Мои сообщества": {
-                "link": "my_communities/"
+                "link": "community/my_communities/"
             },
             "Все сообщества": {
-                "link": ""
+                "link": "community/"
             }
         }
     }

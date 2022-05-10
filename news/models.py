@@ -16,4 +16,3 @@ class Novelty(models.Model):
 class NoveltyLikes(models.Model):
     novelty = models.ForeignKey(to=Novelty, on_delete=models.SET_NULL, null=True)
     liked_by = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
-    like = models.BooleanField('like', default=False)

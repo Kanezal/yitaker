@@ -57,7 +57,7 @@
             <div class="col-md-2 mb-4">
                 <div class="btn-group-vertical" style="max-height: 300px;">
                     {% for panel, dict in nav.items %}
-                    <a class="btn btn-outline-secondary" href="/community/{{dict.link}}" role="button">{{panel}}</a>
+                    <a class="btn btn-outline-secondary" href="/{{dict.link}}" role="button">{{panel}}</a>
                     {% endfor %}
                 </div>
             </div>
@@ -68,6 +68,7 @@
             </div>
         </div>
     </div>
+
     {% block script %}
     {% endblock %}
 </body>

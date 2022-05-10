@@ -5,7 +5,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = [
-            'city', 'other_socnet', 'career',
+            'img', 'city', 'other_socnet', 'career',
             'interests', 'favorite_musics',
             'favorite_movies', 'favorite_movies',
             'favorite_TVshows', 'favorite_books',
@@ -16,3 +16,5 @@ class ProfileForm(forms.ModelForm):
             'attitude_to_smoking', 'attitude_to_alcohol',
             'inspires',
         ]
+        # fields = '__all__'
+        

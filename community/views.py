@@ -12,13 +12,13 @@ def base_ctx() -> dict:
     return {
         "nav": {
             "Создать сообщество": {
-                "link": "create/"
+                "link": "create_new_group"
             },
             "Мои сообщества": {
-                "link": "my_communities/"
+                "link": "view_my_communities"
             },
             "Все сообщества": {
-                "link": ""
+                "link": "all_groups"
             }
         }
     }
@@ -31,14 +31,13 @@ def create_new_group(request):
         addform = AddGroupForm(request.POST, request.FILES)
 
         if addform.is_valid():
-            if request.user.is_authenticated:
-                record = Community(
-                    name=addform.data['name'],
-                    icon=addform.cleaned_data['icon'] if addform.cleaned_data['icon'] else 'static/images/community_icons/no_img.png',
-                    description=addform.cleaned_data['description'],
-                    creater=request.user,
-                    datetime=datetime.datetime.now(),
-                )
+            record = Community(
+                name=addform.data['name'],
+                icon=addform.cleaned_data['icon'] if addform.cleaned_data['icon'] else 'static/images/community_icons/no_img.png',
+                description=addform.cleaned_data['description'],
+                creater=request.user,
+                datetime=datetime.datetime.now(),
+            )
 
             record.save()
             id = record.id

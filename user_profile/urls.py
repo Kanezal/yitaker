@@ -6,7 +6,8 @@ from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
-    path('<int:id>', profile),
+    path('<int:id>/', profile, name="profile"),
+    path('settings/', profile_edit, name="profile_edit"),
 ]
 
 # Имя для вызова это сокращенное название функции, то есть должен отражаться

@@ -1,4 +1,5 @@
 from django.db import models
+from django_resized import ResizedImageField
 
 from django.contrib.auth.models import User
 
@@ -9,9 +10,12 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
     )
 
-    img = models.ImageField(
+    img = ResizedImageField(
+        size=[500, 500],
         default='static\\images\\avatars\\base.png',
-        upload_to='static/images/avatars/%Y/%m/%d/'
+        upload_to='static/images/avatars/%Y/%m/%d/',
+        crop=['middle', 'center'],
+        quality=50,
     )
 
     city = models.CharField(max_length=300, null=True, blank=True)
@@ -34,3 +38,6 @@ class Profile(models.Model):
     attitude_to_smoking = models.CharField(max_length=300, null=True, blank=True)
     attitude_to_alcohol = models.CharField(max_length=300, null=True, blank=True)
     inspires = models.CharField(max_length=300, null=True, blank=True)
+
+    def __str__(self):
+        return f"Профиль пользователя: {self.user}"

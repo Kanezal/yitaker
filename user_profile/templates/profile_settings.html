@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+
+{% block head %}
+<title>Настройка профиля</title>
+{% endblock %}
+
+{% block main %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form show_label=False %}
+    <button class="d-grid mx-auto btn btn-primary" type="submit">Зарегестрироваться</button>
+</form>
+{% endblock %}

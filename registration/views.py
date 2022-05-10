@@ -5,15 +5,23 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
+from user_profile.models import Profile
 
 
-def get_base_context():
-    context = {
-        'menu': [
-            {'link': '/', 'text': 'Главная'},
-        ],
+def base_ctx() -> dict:
+    return {
+        "nav": {
+            "Регистрация": {
+                "link": "register"
+            },
+            "Войти в аккаунт": {
+                "link": "login"
+            },
+            "Выйти из аккаунта": {
+                "link": "logout"
+            }
+        }
     }
-    return context
 
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
@@ -21,13 +29,15 @@ class RegisterUser(CreateView):
     success_url = reverse_lazy('login')
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return get_base_context() | dict(list(context.items())) | {'title': "Регистрация"}
+        context = {**super().get_context_data(**kwargs), **base_ctx(), 'title': 'Регистрация'}
+        return context
 
     def form_valid(self, form):
         user = form.save()
+        profile = Profile(user=user)
+        profile.save()
         login(self.request, user)
-        return redirect('home')
+        return redirect(f'/profile/{user.id}')
 
 
 class LoginUser(LoginView):
@@ -35,8 +45,13 @@ class LoginUser(LoginView):
     template_name = 'login.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return get_base_context() | dict(list(context.items())) | {'title': "Войти"}
+        context = {**super().get_context_data(**kwargs), **base_ctx(), 'title': 'Вход'}
+        return context
 
     def get_success_url(self):
-        return reverse_lazy('home')
+        return redirect(f'/profile/0')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("register")

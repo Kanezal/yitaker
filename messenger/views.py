@@ -70,7 +70,6 @@ def chats(request):
     all_chat_list = []
     for chat_user in chats_users:
         all_chat_list.append(chat_user.chat_id)
-    print(all_chat_list)
 
     ctx = {
         'chats' : all_chat_list,
@@ -95,6 +94,7 @@ def create(request):
 
     if request.method == 'POST': 
         form = ChatForm(request.POST, id = request.user.id)
+
         if form.is_valid():
             new_chat = Chat(
             title = form.cleaned_data['title'],
@@ -104,7 +104,7 @@ def create(request):
             new_chat.save()
 
             all_users = form.cleaned_data["option"]
-            all_users.append(request.user)
+            all_users.append(request.user.id)
 
             for user_id in all_users:
                 chat_user = ChatUser(
@@ -112,6 +112,9 @@ def create(request):
                     user_id = User.objects.get(id=user_id),
                 )
                 chat_user.save()
+
+            return redirect('chats')
+
         else:
             has_errors = True
     else:
@@ -121,8 +124,5 @@ def create(request):
         'has_errors' : has_errors,
         'form' : form,
     }
-
-    if request.POST.get('chats'):
-        return redirect('chats')
 
     return render(request, 'create.html', context = ctx)

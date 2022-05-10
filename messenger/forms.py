@@ -10,9 +10,9 @@ class MessageForm(forms.Form):
 class ChatForm(forms.Form):
     title = forms.CharField(max_length = 25, label = 'Чат')
 
-    option = forms.ModelChoiceField(
-        queryset=Friends.objects.none(),
-        widget=forms.CheckboxSelectMultiple()
+    option = forms.MultipleChoiceField(
+        choices = [],
+        widget = forms.CheckboxSelectMultiple()
     )
 
     def __init__(self, *args, **kwargs):
@@ -31,8 +31,11 @@ class ChatForm(forms.Form):
             else:
                 friends_my = friends_my | User.objects.filter(id = friends.user2.id)
 
-
-        self.fields["option"].queryset = friends_my
+        my_friends = []
+        for el in friends_my:
+            my_friends.append([el.id, el.username])
+            
+        self.fields["option"].choices = my_friends
         
     
         

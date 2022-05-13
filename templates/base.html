@@ -85,8 +85,11 @@
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="/news/" class="nav-link px-2 text-white">Лента</a></li>
                     <li><a href="/search/" class="nav-link px-2 text-white">Поиск</a></li>
-                    <li><a href="/messenger/" class="nav-link px-2 text-white">Сообщения</a></li>
-                    <li><a href="/community/" class="nav-link px-2 text-white">Группы</a></li>
+                    <li><a href="/messenger/chats" class="nav-link px-2 text-white">Сообщения</a></li>
+                    <li><a href="/community/" class="nav-link px-2 text-white">Сообщества</a></li>
+                    {% if request.user.is_superuser %}
+                    <li><a href="/admin/" class="nav-link px-2 text-white">Админ-панель</a></li>
+                    {% endif %}
                 </ul>
                 <div class="dropdown text-end">
                     <a href="#" class="d-block link-secondary text-decoration-none dropdown-toggle" id="dropdownUser1"

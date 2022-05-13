@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from regex import R
 from .models import Profile
 from .forms import ProfileForm
 import datetime

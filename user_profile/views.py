@@ -33,6 +33,18 @@ def profile(request, id):
 
 def profile_edit(request):
     ctx = base_ctx(request.user.id, request.user)
+    fields = [
+            'city', 'other_socnet', 'career',
+            'interests', 'favorite_musics',
+            'favorite_movies', 'favorite_movies',
+            'favorite_TVshows', 'favorite_books',
+            'favorite_games', 'favorite_quotes',
+            'status', 'about_me', 'life_position',
+            'political_preferences', 'world_outlook',
+            'world_outlook', 'main_in_life',
+            'attitude_to_smoking', 'attitude_to_alcohol',
+            'inspires',
+        ]
 
     profile = request.user.profile
     
@@ -46,6 +58,18 @@ def profile_edit(request):
         form = ProfileForm(instance=profile)
     
     ctx['form'] = form
+    profile.rating = 0
+    for field in fields:
+        if getattr(profile, field) != None:
+            profile.rating += len(getattr(profile, field))//10
+    if profile.img_confirmation:
+        profile.rating += 20
+    profile.save()
+
+
 
     return render(request, 'profile_settings.html', ctx)
+
+
+
 

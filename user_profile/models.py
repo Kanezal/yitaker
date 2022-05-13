@@ -17,6 +17,8 @@ class Profile(models.Model):
         crop=['middle', 'center'],
         quality=50,
     )
+    rating = models.IntegerField(default=0)
+    img_confirmation = models.BooleanField(default=False)
 
     city = models.CharField(max_length=300, null=True, blank=True)
     other_socnet = models.CharField(max_length=300, null=True, blank=True)

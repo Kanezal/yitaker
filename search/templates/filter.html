@@ -3,34 +3,8 @@
 {% load bootstrap5 %}
 
 {% block main %}
-<div>
+<div align="center">
     <br/><br/>
-    <h3>Live Search Of Social Network Users</h3>
-    <div>
-        <form method="get">
-            {{UserFilter.form}}
-            <button class="btn btn-primary" type="submit">Search</button>
-        </form>
-
-        <div>
-            <table class="table table-sm">
-                <tr>
-                    <th>Name</th>
-                </tr>
-                {% for user in users %}
-                <tr>
-                    <td>{{user.username}}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
-    <hr>
-    <br/>
-    <h3>Live Search Of Social Network Novelties</h3>
-
-    <hr>
-    <br/>
     <h3>Advanced Search</h3>
     <div>
         <form method="get">
@@ -41,21 +15,28 @@
         <div>
             <table class="table table-sm">
                 <tr>
-                    <th>Name</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>City</th>
+                    <th>Other social net</th>
                     <th>Career</th>
                     <th>Status</th>
+                    <th>About me</th>
                 </tr>
                 {% for profile in profiles %}
                 <tr>
-                    <td>{{profile.user}}</td>
+                    <td>{{profile.user.first_name}}</td>
+                    <td>{{profile.user.last_name}}</td>
                     <td>{{profile.city}}</td>
+                    <td>{{profile.other_socnet}}</td>
                     <td>{{profile.career}}</td>
                     <td>{{profile.status}}</td>
+                    <td>{{profile.about_me}}</td>
                 </tr>
                 {% endfor %}
             </table>
         </div>
     </div>
+    <hr>
 </div>
 {% endblock %}

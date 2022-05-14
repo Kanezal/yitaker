@@ -2,18 +2,46 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from friends.models import Friends
 
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from user_profile.models import Profile
+
+
+def base_ctx() -> dict:
+    return {
+        "nav": {
+
+            "Мои друзья": {
+                "link": "my_friends"
+            },
+            "Возможные друзья": {
+                "link": "friends"
+            },
+        }
+    }
+
 
 def my_friends(request):
-    f1 = Friends.objects.filter(user1=request.user, user2_confirmation=True)
-    f2 = Friends.objects.filter(user2=request.user)
-    ctx = {
-        'f1': f1,
-        'f2': f2,
-    }
+    ctx = base_ctx()
+    profiles = list()
+    for profile in Profile.objects.all().order_by('rating'):
+        if str(Friends.objects.filter(user1=request.user, user2=profile.id, user2_confirmation=True)) != "<QuerySet []>" or str(Friends.objects.filter(user2=request.user, user1=profile.id, user2_confirmation=True)) != "<QuerySet []>":
+            profiles.append(profile)
+    ctx['profiles'] = profiles
     return render(request, 'friends.html', ctx)
+
+
+def friends(request):
+    ctx = base_ctx()
+    profiles = list()
+    for profile in Profile.objects.all().order_by('rating'):
+        if str(Friends.objects.filter(user1=request.user, user2=profile.id)) == "<QuerySet []>" and str(Friends.objects.filter(user2=request.user, user1=profile.id)) == "<QuerySet []>":
+            profiles.append(profile)
+    ctx['profiles'] = profiles
+    return render(request, 'friends.html', ctx)
+
 
 
 def is_friends(user1, user2) -> bool:

@@ -1,4 +1,4 @@
-from .models import ChatUser, Message, Chat
+from .models import ChatUser, Message, Chat, GroupChat
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
@@ -105,7 +105,6 @@ def create(request):
         if form.is_valid():
             new_chat = Chat(
             title = form.cleaned_data['title'],
-            user_creator = request.user,
             date_of_creation = datetime.datetime.now(),
             )
             new_chat.save()

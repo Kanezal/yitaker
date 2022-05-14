@@ -6,7 +6,8 @@ from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
-    path('my_friends/', my_friends), 
+    path('my_friends/', my_friends, name="my_friends"),
+    path('', friends, name="friends"),
     path('is_friend/<int:id>', IsFriend.as_view()),
     path('add_friend/<int:id>', AddFriend.as_view()),
     path('accept_friend/<int:id>', AcceptFriend.as_view()),

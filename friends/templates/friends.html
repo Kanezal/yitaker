@@ -1,16 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    {% for friend in f1 %}
-       <p><a href="/profile/{{ friend.user2.id }}"> {{ friend.user2.username }}</a></p>
-    {% endfor %}
+{% extends 'base.html' %}
 
-    {% for friend in f2 %}
-        <p><a href="/profile/{{ friend.user1.id }}"> {{ friend.user1.username }}</a></p>
+{% load bootstrap5 %}
+
+{% block head %}
+<title>Друзья</title>
+{% endblock %}
+{% block main %}
+    {% for profile in profiles %}
+        {% if profile.user.id != request.user.id %}
+            <div class="d-flex position-relative">
+                <div class="flex-shrink-0">
+                    <img src="{{ profile.img.url }}" class="rounded-circle" alt="Изображение"
+                        style="object-fit: cover; width: 100px; height: 100px;">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <h5 class="card-title">{{profile.user}}</h5>
+                    {% if profile.about_me != None %}
+                        <p class="card-text">{{ profile.about_me }}</p>
+                    {% endif %}
+
+                    <a href="/profile/{{profile.user.id}}" class="stretched-link"></a>
+                </div>
+            </div>
+            <hr>
+        {% endif %}
     {% endfor %}
-</body>
-</html>
+{% endblock %}

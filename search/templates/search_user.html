@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+{% endblock %}
+
+{% block main %}
+    <div>
+        <br/><br/>
+        <h3>Live Search Of Social Network Users</h3>
+        <div class="container">
+            <div align="center">
+                <input type="text" name="search" id="search" placeholder="Search" class="form-control" />
+            </div>
+            <div>
+                <ul class="list-group" id="result"></ul>
+            </div>
+        </div>
+        <hr>
+
+        <div id="id">
+            {{data|json_script:"data"}}
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+let Data = JSON.parse(document.getElementById('id').textContent);
+
+$(document).ready(function(){
+ $.ajaxSetup({ cache: false });
+ $('#search').keyup(function(){
+ $('#result').html('');
+ $('#state').val('');
+ var searchField = $('#search').val();
+ var expression = new RegExp(searchField, "i");
+
+ $.each(Data, function(key, value){
+ if (value.first_name.search(expression) != -1 || value.last_name.search(expression) != -1)
+ {
+ $('#result').append('<li class="list-group-item link-class"> '+value.first_name+' <span class="text-muted">'+value.last_name+'</span></li>');
+ }
+ });
+ });
+
+ $('#result').on('click', 'li', function() {
+ var click_text = $(this).text().split('|');
+ $('#search').val($.trim(click_text[0]));
+ $("#result").html('');
+ });
+});
+</script>
+{% endblock %}

@@ -26,7 +26,7 @@ def base_ctx() -> dict:
 def my_friends(request):
     ctx = base_ctx()
     profiles = list()
-    for profile in Profile.objects.all().order_by('rating'):
+    for profile in Profile.objects.all().order_by('-rating'):
         if str(Friends.objects.filter(user1=request.user, user2=profile.id, user2_confirmation=True)) != "<QuerySet []>" or str(Friends.objects.filter(user2=request.user, user1=profile.id, user2_confirmation=True)) != "<QuerySet []>":
             profiles.append(profile)
     ctx['profiles'] = profiles
@@ -36,7 +36,7 @@ def my_friends(request):
 def friends(request):
     ctx = base_ctx()
     profiles = list()
-    for profile in Profile.objects.all().order_by('rating'):
+    for profile in Profile.objects.all().order_by('-rating'):
         if str(Friends.objects.filter(user1=request.user, user2=profile.id)) == "<QuerySet []>" and str(Friends.objects.filter(user2=request.user, user1=profile.id)) == "<QuerySet []>":
             profiles.append(profile)
     ctx['profiles'] = profiles

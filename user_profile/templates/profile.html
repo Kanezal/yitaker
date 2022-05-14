@@ -2,15 +2,21 @@
 
 {% load bootstrap5 %}
 
+{% block head %}
+<title>{{user.first_name}} {{user.last_name}}</title>
+{% endblock %}
+
 {% block main %}
 <div class="row" id="app">
-    <div class="col">
-        <div class="card" style="width: 18rem;">
+    <div class="col-md-3">
+        <div class="card" style="">
             <img src="{{ user.profile.img.url }}" class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
                 <p class="card-text">
-                    Some quick example text to build on the card title and make up the bulk of the card's content.
+                    {% if user.profile.status %}
+                    {{user.profile.status}}
+                    {% endif %}
                 </p>
                 {% if user != request.user %}
                 <a id="add_friend" class="btn btn-primary" @click="friendButtonClick">[[ friendButtonContent ]]</a>
@@ -18,18 +24,15 @@
             </div>
         </div>
     </div>
-    <div class="col">
+    <div class="col-md-9">
         {% for new in user.news.all %}
         <div class="card mx-auto text-dark bg-light mb-3" style="max-width: 700px;">
-            <h5 class="card-header">
-                <div class="d-flex justify-content-evenly align-items-center">
-                    <div class="mr-2">
-                        <img class="rounded-circle" width="45" height="45" src="{{ user.profile.img.url }}" alt="">
-                    </div>
-                    <div class="ml-2">
-                        <div class="h5 m-0">{{new.sender}}</div>
-                        <div class="h7 text-muted">{{new.datetime}}</div>
-                    </div>
+            <h5 class="card-header d-flex position-relative">
+                <img class="img-fluid rounded-circle me-3" src="{{new.sender.profile.img.url}}" style="height: 50px">
+                <div class="ml-2">
+                    <a href="{% url 'profile' new.sender.id %}" class="h5 m-0 stretched-link text-black" style="color: #000000;
+                    text-decoration: none;"> {{new.sender.first_name}} {{new.sender.last_name}}</a>
+                    <div class="h7 text-muted">{{new.datetime}}</div>
                 </div>
             </h5>
             <div class="card-body">
@@ -39,7 +42,7 @@
                 <p class="card-text">{{ new.text }}</p>
             </div>
             {% if new.picture != None %}
-            <img class="card-img-bottom" src="{{ new.picture.url }}">
+            <img class="card-img-bottom" src="{{ new.picture.url }}" alt="">
             {% endif %}
         </div>
         {% endfor %}

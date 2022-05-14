@@ -6,6 +6,7 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
 from user_profile.models import Profile
+from django.urls import reverse
 
 
 def base_ctx() -> dict:
@@ -49,7 +50,7 @@ class LoginUser(LoginView):
         return context
 
     def get_success_url(self):
-        return redirect(f'/profile/0')
+        return reverse('profile', args=(self.request.user.id,))
 
 
 def logout_view(request):

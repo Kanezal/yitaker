@@ -35,9 +35,13 @@
 
 {% for new in news %}
 <div class="card mx-auto text-dark bg-light mb-3" style="max-width: 700px;">
-    <h5 class="card-header">
-        Новость от:
-        {{new.sender}}
+    <h5 class="card-header d-flex position-relative">
+        <img class="img-fluid rounded-circle me-3" src="{{new.sender.profile.img.url}}" style="height: 50px">
+        <div class="ml-2">
+            <a href="{% url 'profile' new.sender.id %}" class="h5 m-0 stretched-link text-black" style="color: #000000;
+            text-decoration: none;"> {{new.sender.first_name}} {{new.sender.last_name}}</a>
+            <div class="h7 text-muted">{{new.datetime}}</div>
+        </div>
     </h5>
     <div class="card-body">
         <h5 class="card-title">
@@ -47,9 +51,6 @@
     </div>
     {% if new.picture != None %}
     <img class="card-img-bottom" src="{{ new.picture.url }}" alt="">
-    <div class="card-footer">
-        {{new.datetime}}
-    </div>
     {% endif %}
 </div>
 {% endfor %}

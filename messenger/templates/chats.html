@@ -1,20 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Chat</title>
-</head>
+{% extends 'base.html' %}
 
-<body>
+{% block head %}
+<title>Чаты</title>
+{% endblock %}
 
-    <p><strong>Chats</strong></p> 
-
-    <button onclick = "window.location.href = '/messenger/chats/create'">создать новый чат</button>
-
+{% block main %}
     {% for chat in chats %}
-    <p> <strong><td><a href="chats/chat/{{chat.id}}">{{chat.title}}</a></td></strong>   {{chat.user_creator}} </p>
-    {% endfor %} 
+    <p> <strong><td><a href=""></a></td></strong>   {{chat.user_creator}} </p>
+    <div class="d-flex position-relative">
+        <div class="flex-shrink-0">
+            <img src="{{ chat.icon.url }}" class="rounded-circle" alt="Изображение"
+                style="object-fit: cover; width: 100px; height: 100px;">
+        </div>
+        <div class="flex-grow-1 ms-3">
+            <h5 class="card-title">{{chat.title}}</h5>
+            <p class="card-text">
+                Участники:
+                {% for relation in chat.chatuser.all %}
+                    {{relation.user_id.first_name}} {{relation.user_id.last_name}};
+                {% endfor %}
+            </p>
     
-
-</body>
-</html>
+            <a href="{% url 'chat' chat.id %}" class="stretched-link"></a>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+    
+{% endblock %}

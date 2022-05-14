@@ -2,10 +2,17 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from friends.models import Friends
+from .models import Message
 from django.db.models import Q
 
-class MessageForm(forms.Form):
-    text = forms.CharField(max_length = 100, label = 'Введите сообщение', widget=forms.Textarea)
+class MessageForm(forms.ModelForm):
+    text = forms.CharField(label = 'Введите сообщение', widget=forms.Textarea)
+    class Meta:
+        model = Message
+        fields = ('text', )
+        widgets = {
+            'text': forms.Textarea()
+        }
 
 class ChatForm(forms.Form):
     title = forms.CharField(max_length = 25, label = 'Чат')

@@ -7,6 +7,7 @@ import datetime
 from friends.models import Friends
 from django.db.models import Q
 
+from django.contrib.auth.decorators import login_required
 
 def base_ctx() -> dict:
     return {
@@ -17,6 +18,7 @@ def base_ctx() -> dict:
         }
     }
 
+@login_required
 def messages(request, id): 
     ctx = base_ctx()
 
@@ -56,6 +58,7 @@ def messages(request, id):
             
             return render(request, 'messages.html', context = ctx)
 
+@login_required
 def chats(request):
     ctx = base_ctx()
     has_errors = False
@@ -87,6 +90,7 @@ def chats(request):
 
     return render(request, 'chats.html', context = ctx)
 
+@login_required
 def delete(request, id):
     if request.user == Message.objects.get(id=id).user_sender:
         message = Message.objects.get(id=id)
@@ -95,6 +99,7 @@ def delete(request, id):
         return redirect(f"chat/{message.chat_id.id}") 
     return HttpResponse("<h1>ну это бан</h1>")
 
+@login_required
 def create(request):
     
     has_errors = False

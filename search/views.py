@@ -10,18 +10,15 @@ from .serializers import *
 def base_ctx() -> dict:
     return {
         "nav": {
-            "Поиск пользователя по нику": {
-                "link": "search_user"
-            },
             "Поиск пользователя по интересам": {
                 "link": "search_advanced"
             },
-            "Поиск новостей": {
-                "link": "search_novelty"
-            },
-            "Поиск сообществ": {
-                "link": "search_community"
-            },
+            # "Поиск новостей": {
+            #     "link": "search_novelty"
+            # },
+            # "Поиск сообществ": {
+            #     "link": "search_community"
+            # },
         }
     }
 

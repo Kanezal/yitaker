@@ -1,3 +1,4 @@
+from audioop import add
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.shortcuts import redirect
@@ -60,10 +61,10 @@ def news(request):
 
         if addform.is_valid():
             record = Novelty(
-                name_new=addform.data['name_new'],
-                text=addform.data['text'],
+                name_new=addform.cleaned_data['name_new'],
+                text=addform.cleaned_data['text'],
                 sender=request.user,
-                picture=request.FILES['picture'],
+                picture=addform.cleaned_data['picture'] if addform.cleaned_data['picture'] else None,
                 datetime=datetime.datetime.now(),
             )
             record.save()

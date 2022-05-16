@@ -27,8 +27,11 @@ class ProfileFilter(django_filters.FilterSet):
     inspires = CharFilter(field_name='inspires', lookup_expr='icontains')
     class Meta:
         model = Profile
-        fields = '__all__'
-        exclude = ['user', 'img']
+        fields = ['first_name', 'last_name', 'city', 'other_socnet', 'career', 'interests', 'favorite_musics', 'favorite_movies',
+                  'favorite_TVshows', 'favorite_books', 'favorite_games', 'favorite_quotes', 'status',
+                 'about_me', 'life_position', 'political_preferences', 'world_outlook', 'main_in_life',
+                 'main_in_people', 'attitude_to_smoking', 'attitude_to_alcohol', 'inspires']
+        exclude = ['user', 'img', 'rating', 'img_confirmation']
 
 
 #class ProfileFilter(django_filters.FilterSet):

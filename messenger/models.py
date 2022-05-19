@@ -9,7 +9,7 @@ class Chat(models.Model):
     icon = ResizedImageField(
         size=[500, 500],
         default='static/images/avatars/base.png',
-        upload_to='static/tmp/',
+        upload_to='static/group_chat/',
         crop=['middle', 'center'],
         quality=50,
     )
@@ -37,7 +37,7 @@ class Message(models.Model):
     chat_id = models.ForeignKey(to = Chat, on_delete = models.CASCADE, null=True) # id Диалога к которому относится сообщение
     isRead = models.BooleanField(default = False)
     isVisible_all_users = models.BooleanField(default = True)
- 
+  
 class ChatUser(models.Model):
     chat_id = models.ForeignKey(to = Chat, on_delete = models.CASCADE, null=True, related_name="chatuser")
     user_id = models.ForeignKey(to = User, on_delete = models.CASCADE, null=True)

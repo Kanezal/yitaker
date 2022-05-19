@@ -76,15 +76,13 @@ def chats(request):
     #         has_errors = True
     # else:
     #     form = ChatForm(id = request.user.id)
-
+    
     chats_users = ChatUser.objects.filter(user_id = request.user)
     all_chat_list = []
     for chat_user in chats_users:
         chat = chat_user.chat_id
         chat.icon = ChatUser.objects.filter(~Q(user_id=request.user), Q(chat_id=chat))[0].user_id.profile.img
-        print(chat.icon)
         all_chat_list.append(chat)
-
     ctx['chats'] = all_chat_list
     ctx['has_errors'] = has_errors
 
@@ -108,9 +106,11 @@ def create(request):
         form = ChatForm(request.POST, id = request.user.id)
 
         if form.is_valid():
-            new_chat = Chat(
-            title = form.cleaned_data['title'],
-            date_of_creation = datetime.datetime.now(),
+            new_chat = GroupChat(
+                title = form.cleaned_data['title'],
+                user_creator = request.user,
+                icon = form.cleaned_data['icon'],
+                date_of_creation = datetime.datetime.now(),
             )
             new_chat.save()
 

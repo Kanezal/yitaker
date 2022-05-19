@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from friends.models import Friends
-from .models import Message
+from .models import Message, GroupChat
 from django.db.models import Q
 
 class MessageForm(forms.ModelForm):
@@ -13,6 +13,7 @@ class MessageForm(forms.ModelForm):
         widgets = {
             'text': forms.Textarea()
         }
+
 
 class ChatForm(forms.Form):
     title = forms.CharField(max_length = 25, label = 'Чат')
@@ -43,6 +44,6 @@ class ChatForm(forms.Form):
             my_friends.append([el.id, el.username])
             
         self.fields["option"].choices = my_friends
+    icon = forms.ImageField(required=False)
         
-    
         

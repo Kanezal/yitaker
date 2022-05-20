@@ -3,11 +3,10 @@
 {% load bootstrap5 %}
 
 {% block head %}
-<title>Друзья</title>
+<title>Участники</title>
 {% endblock %}
 {% block main %}
     {% for profile in profiles %}
-        {% if profile.user.id != request.user.id %}
             <div class="d-flex position-relative">
                 <div class="flex-shrink-0">
                     <img src="{{ profile.img.url }}" class="rounded-circle" alt="Изображение"
@@ -23,6 +22,5 @@
                 </div>
             </div>
             <hr>
-        {% endif %}
     {% endfor %}
 {% endblock %}

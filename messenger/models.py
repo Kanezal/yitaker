@@ -18,7 +18,7 @@ class Chat(models.Model):
     def __str__(self):
         return self.title
 
-class GroupChat:
+class GroupChat(models.Model):
     title = models.CharField(max_length = 25)# заголовок чата, его название
     user_creator = models.ForeignKey(to = User, on_delete = models.SET_NULL, null=True)# id пользователя создавшего чат
     icon = ResizedImageField(

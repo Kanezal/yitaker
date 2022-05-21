@@ -109,14 +109,14 @@ def create(request):
             new_chat = GroupChat(
                 title = form.cleaned_data['title'],
                 user_creator = request.user,
-                icon = form.cleaned_data['icon'],
+                icon = form.cleaned_data['icon'] if form.cleaned_data['icon'] else None,
                 date_of_creation = datetime.datetime.now(),
             )
             new_chat.save()
 
             all_users = form.cleaned_data["option"]
             all_users.append(request.user.id)
-
+            
             for user_id in all_users:
                 chat_user = ChatUser(
                     chat_id = Chat.objects.get(id=new_chat.id),

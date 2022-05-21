@@ -5,16 +5,68 @@
 {% block main %}
 <div align="center">
     <h3>Расширенный поиск</h3>
-    <div class="row">
-        <div class="card col-md-4">
-            <div class="card-body">
-                <form method="get">
-                    {% bootstrap_form ProfileFilter.form show_label=False %}
-                    <button class="btn btn-primary" type="submit">Search</button>
-                </form>
-            </div>
-        </div>
 
+
+        <div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Главное
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+            {{ ProfileFilter.form.first_name.label }} {{ ProfileFilter.form.first_name }}
+            {{ ProfileFilter.form.last_name.label }} {{ ProfileFilter.form.last_name }}
+            {{ ProfileFilter.form.city.label }} {{ ProfileFilter.form.city }}
+            {{ ProfileFilter.form.other_socnet.label }} {{ ProfileFilter.form.other_socnet }}
+            {{ ProfileFilter.form.career.label }} {{ ProfileFilter.form.career }}
+            {{ ProfileFilter.form.status.label }} {{ ProfileFilter.form.status }}
+            {{ ProfileFilter.form.about_me.label }} {{ ProfileFilter.form.about_me }}
+
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Интересы
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+            {{ ProfileFilter.form.interests.label }} {{ ProfileFilter.form.interests }}
+            {{ ProfileFilter.form.favorite_musics.label }} {{ ProfileFilter.form.favorite_musics }}
+            {{ ProfileFilter.form.favorite_movies.label }} {{ ProfileFilter.form.favorite_movies }}
+            {{ ProfileFilter.form.favorite_TVshows.label }} {{ ProfileFilter.form.favorite_TVshows }}
+            {{ ProfileFilter.form.favorite_books.label }} {{ ProfileFilter.form.favorite_books }}
+            {{ ProfileFilter.form.favorite_games.label }} {{ ProfileFilter.form.favorite_games }}
+            {{ ProfileFilter.form.favorite_quotes.label }} {{ ProfileFilter.form.favorite_quotes }}
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        Обо мне
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+
+            {{ ProfileFilter.form.life_position.label }} {{ ProfileFilter.form.life_position }}
+            {{ ProfileFilter.form.political_preferences.label }} {{ ProfileFilter.form.political_preferences }}
+            {{ ProfileFilter.form.world_outlook.label }} {{ ProfileFilter.form.world_outlook }}
+            {{ ProfileFilter.form.main_in_life.label }} {{ ProfileFilter.form.main_in_life }}
+            {{ ProfileFilter.form.main_in_people.label }} {{ ProfileFilter.form.main_in_people }}
+            {{ ProfileFilter.form.attitude_to_smoking.label }} {{ ProfileFilter.form.attitude_to_smoking }}
+            {{ ProfileFilter.form.attitude_to_alcohol.label }} {{ ProfileFilter.form.attitude_to_alcohol }}
+            {{ ProfileFilter.form.inspires.label }} {{ ProfileFilter.form.inspires }}
+      </div>
+    </div>
+  </div>
+</div>
+    <button class="btn btn-primary" type="submit">Search</button>
 
         <div class="card col-md-6">
             <table class="table table-sm">

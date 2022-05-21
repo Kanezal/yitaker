@@ -16,6 +16,9 @@ def base_ctx() -> dict:
             "Мои друзья": {
                 "link": "my_friends"
             },
+            "Заявки в друзья": {
+                "link": "applications"
+            },
             "Возможные друзья": {
                 "link": "friends"
             },
@@ -38,6 +41,17 @@ def friends(request):
     profiles = list()
     for profile in Profile.objects.all().order_by('-rating'):
         if str(Friends.objects.filter(user1=request.user, user2=profile.id, user2_confirmation=True)) == "<QuerySet []>" and str(Friends.objects.filter(user2=request.user, user1=profile.id, user2_confirmation=True)) == "<QuerySet []>":
+            profiles.append(profile)
+    ctx['profiles'] = profiles
+    return render(request, 'friends.html', ctx)
+
+
+def applications(request):
+    ctx = base_ctx()
+    profiles = list()
+    for profile in Profile.objects.all().order_by('-rating'):
+        if str(Friends.objects.filter(user2=request.user, user1=profile.id,
+                                       user2_confirmation=False)) != "<QuerySet []>":
             profiles.append(profile)
     ctx['profiles'] = profiles
     return render(request, 'friends.html', ctx)

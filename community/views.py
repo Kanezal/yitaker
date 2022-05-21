@@ -1,4 +1,6 @@
 from django.shortcuts import render
+
+from user_profile.models import Profile
 from .models import Community
 from .forms import AddGroupForm
 import datetime
@@ -87,12 +89,28 @@ def view_group(request, id):
     if str(e) != "<QuerySet []>":
         existance = True
 
+    count = 0
+    for profile in Profile.objects.all().order_by('-rating'):
+        if str(ExistenceInGroup.objects.filter(user=profile.id, group=Community.objects.get(id=id))) != "<QuerySet []>":
+            count += 1
+
+    ctx['count'] = count
     ctx["group"] = group
     ctx["news"] = news
     ctx["existance"] = existance
 
     return render(request, 'view_group.html', context=ctx)
 
+
+def members(request, id):
+    profiles = list()
+    for profile in Profile.objects.all().order_by('-rating'):
+        if str(ExistenceInGroup.objects.filter(user=profile.id, group=Community.objects.get(id=id))) != "<QuerySet []>":
+            profiles.append(profile)
+    ctx = {
+        'profiles': profiles,
+    }
+    return render(request, 'members.html', context=ctx)
 
 def groups(request):
     ctx = base_ctx()

@@ -7,10 +7,31 @@
 {% endblock %}
 
 {% block main %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{form}}
-        <button class="btn btn-success" type="submit">создать</button>
-    </form>
+
+<form class="row g-3">
+    <div class="col-md-6">
+      <input type="text" class="form-control" placeholder="Название группы">
+    </div>
+
+    <div class="form-check">
+        <label class="form-label">Выберите участников: </label>
+        <label class="form-check-label" for="flexCheckDefault">
+        {% for friend in form.option %}
+
+        {{friend}}
+
+        {% endfor %}
+        </label>
+    </div>
+
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Выберите аватарку группы</label>
+        <input class="form-control" type="file" id="formFile">
+    </div>
+
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Confirm identity</button>
+    </div>
+
 {% endblock %}
 

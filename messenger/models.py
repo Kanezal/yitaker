@@ -5,18 +5,20 @@ from django.contrib.auth.models import User
 from django_resized import ResizedImageField
 
 class Chat(models.Model):
-    title = models.CharField(max_length = 25)# заголовок чата, его название
+    title = models.CharField(max_length=255, null=True)# заголовок чата, его название
     icon = ResizedImageField(
         size=[500, 500],
         default='static/images/avatars/base.png',
-        upload_to='static/group_chat/',
+        upload_to='static/tmp/',
         crop=['middle', 'center'],
         quality=50,
     )
+    
+    user1 = models.ForeignKey(User, related_name='chat_user1', on_delete=models.PROTECT, null=True)
+    user2 = models.ForeignKey(User, related_name='chat_user2', on_delete=models.PROTECT, null=True)
+
     date_of_creation = models.DateTimeField(auto_now_add = True) # время создания
 
-    def __str__(self):
-        return self.title
 
 class GroupChat(models.Model):
     title = models.CharField(max_length = 25)# заголовок чата, его название

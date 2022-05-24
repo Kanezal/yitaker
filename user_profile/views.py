@@ -82,28 +82,3 @@ def profile_edit(request):
     return render(request, 'profile_settings.html', ctx)
 
 
-def profile_start_chat(request, id):
-    if request.user.id == id:
-        return redirect('/')
-    
-    chats = ChatUser.objects.filter(user_id=request.user)
-    for chat in chats:
-        chat = chat.chat_id
-        another_chat = ChatUser.objects.filter(~Q(user_id=request.user), Q(chat_id=chat))
-        if len(another_chat) > 0:
-            return redirect(reverse('chat', args=(chat.id,)))
-    
-    new_chat = Chat(
-        title=f"Чат между {request.user.first_name} и {User.objects.get(id=id).first_name}"
-    )
-    new_chat.save()
-    ChatUser(
-        chat_id = new_chat,
-        user_id = request.user,
-    ).save()
-    ChatUser(
-        chat_id = new_chat,
-        user_id = User.objects.get(id=id),
-    ).save()
-
-    return redirect(reverse('chat', args=(new_chat.id, )))

@@ -1,37 +1,15 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title>A</title>
+    </head>
+    <body>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
-{% load bootstrap5 %}
+            {{form}}
 
-{% block head %}
-<title>Создание чата</title>
-{% endblock %}
-
-{% block main %}
-
-<form class="row g-3">
-    <div class="col-md-6">
-      <input type="text" class="form-control" placeholder="Название группы">
-    </div>
-
-    <div class="form-check">
-        <label class="form-label">Выберите участников: </label>
-        <label class="form-check-label" for="flexCheckDefault">
-        {% for friend in form.option %}
-
-        {{friend}}
-
-        {% endfor %}
-        </label>
-    </div>
-
-    <div class="mb-3">
-        <label for="formFile" class="form-label">Выберите аватарку группы</label>
-        <input class="form-control" type="file" id="formFile">
-    </div>
-
-    <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Confirm identity</button>
-    </div>
-
-{% endblock %}
-
+            <button type="submit">aa</button>
+        </form>
+    </body>
+</html>

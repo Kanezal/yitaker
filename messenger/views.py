@@ -34,6 +34,7 @@ def messages(request, id):
                 chat_id = Chat.objects.get(id=id)
             )
             new_message.save()
+            return redirect('chat', id=id)
         else:
             has_errors = True
     else:
@@ -81,7 +82,10 @@ def chats(request):
     all_chat_list = []
     for chat_user in chats_users:
         chat = chat_user.chat_id
-        chat.icon = ChatUser.objects.filter(~Q(user_id=request.user), Q(chat_id=chat))[0].user_id.profile.img
+        user2 = ChatUser.objects.filter(~Q(user_id=request.user), Q(chat_id=chat))[0].user_id
+
+        chat.title = f"{user2.first_name} {user2.last_name}"
+        chat.icon = user2.profile.img
         print(chat.icon)
         all_chat_list.append(chat)
 

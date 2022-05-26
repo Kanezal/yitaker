@@ -9,6 +9,7 @@ from django.shortcuts import redirect
 from news.forms import AddNoveltyForm
 from news.models import Novelty
 from .models import ExistenceInGroup
+from django.contrib.auth.decorators import login_required
 
 def base_ctx() -> dict:
     return {
@@ -26,6 +27,7 @@ def base_ctx() -> dict:
     }
 
 
+@login_required
 def create_new_group(request):
     context = base_ctx()
 
@@ -61,6 +63,7 @@ def create_new_group(request):
     return render(request, 'create_new_group.html', context)
 
 
+@login_required
 def view_group(request, id):
     ctx = base_ctx()
 
@@ -75,7 +78,7 @@ def view_group(request, id):
                 name_new=addform.cleaned_data['name_new'],
                 text=addform.cleaned_data['text'],
                 sender=request.user,
-                picture=request.FILES['picture'],
+                picture=addform.cleaned_data['picture'] if addform.cleaned_data['picture'] else None,
                 datetime=datetime.datetime.now(),
                 group=group,
             )
@@ -102,6 +105,7 @@ def view_group(request, id):
     return render(request, 'view_group.html', context=ctx)
 
 
+@login_required
 def members(request, id):
     profiles = list()
     for profile in Profile.objects.all().order_by('-rating'):
@@ -112,15 +116,19 @@ def members(request, id):
     }
     return render(request, 'members.html', context=ctx)
 
+
+@login_required
 def groups(request):
     ctx = base_ctx()
 
     all_groups = Community.objects.all().order_by("-datetime")
     ctx['groups'] = all_groups
+    ctx['len'] = len(all_groups)
 
     return render(request, 'groups.html', context=ctx)
 
 
+@login_required
 def create_new_novelty(request, id):
     context = {}
 
@@ -134,7 +142,7 @@ def create_new_novelty(request, id):
                 name_new=addform.cleaned_data['name_new'],
                 text=addform.cleaned_data['text'],
                 sender=request.user,
-                picture=request.FILES['picture'],
+                picture=addform.cleaned_data['picture'] if addform.cleaned_data['picture'] else None,
                 datetime=datetime.datetime.now(),
                 group=group,
             )
@@ -145,20 +153,23 @@ def create_new_novelty(request, id):
     return render(request, 'create_new_novelty.html', context)
 
 
+@login_required
 def view_my_communities(request):
     ctx= base_ctx()
 
-    all_communities = ExistenceInGroup.objects.all()
+    all_communities = ExistenceInGroup.objects.all().order_by("-group__datetime")
     my_communities = []
     for community in all_communities:
         if community.user == request.user:
             my_communities.append(community.group)
 
     ctx['groups'] = my_communities
+    ctx['len'] = len(my_communities)
 
     return render(request, 'view_my_communities.html', ctx)
 
 
+@login_required
 def add_to_group(request, id):
     n = ExistenceInGroup(user=request.user, group=Community.objects.get(id=id))
     n.save()
@@ -166,6 +177,7 @@ def add_to_group(request, id):
     return redirect('view_group', id=id)
 
 
+@login_required
 def delete_from_group(request, id):
     e = ExistenceInGroup.objects.filter(user=request.user, group=Community.objects.get(id=id)).delete()
 

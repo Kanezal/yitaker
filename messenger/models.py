@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django_resized import ResizedImageField
 
 class Chat(models.Model):
-    title = models.CharField(max_length = 25)# заголовок чата, его название
+    title = models.CharField(max_length=255)# заголовок чата, его название
     icon = ResizedImageField(
         size=[500, 500],
         default='static/images/avatars/base.png',

@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from user_profile.models import Profile
+from django.contrib.auth.decorators import login_required
 
 
 def base_ctx() -> dict:
@@ -26,6 +27,7 @@ def base_ctx() -> dict:
     }
 
 
+@login_required
 def my_friends(request):
     ctx = base_ctx()
     profiles = list()
@@ -33,9 +35,11 @@ def my_friends(request):
         if str(Friends.objects.filter(user1=request.user, user2=profile.id, user2_confirmation=True)) != "<QuerySet []>" or str(Friends.objects.filter(user2=request.user, user1=profile.id, user2_confirmation=True)) != "<QuerySet []>":
             profiles.append(profile)
     ctx['profiles'] = profiles
-    return render(request, 'friends.html', ctx)
+    ctx['len'] = len(profiles)
+    return render(request, 'my_friends.html', ctx)
 
 
+@login_required
 def friends(request):
     ctx = base_ctx()
     profiles = list()
@@ -43,9 +47,11 @@ def friends(request):
         if str(Friends.objects.filter(user1=request.user, user2=profile.id, user2_confirmation=True)) == "<QuerySet []>" and str(Friends.objects.filter(user2=request.user, user1=profile.id, user2_confirmation=True)) == "<QuerySet []>":
             profiles.append(profile)
     ctx['profiles'] = profiles
+    ctx['len'] = len(profiles)
     return render(request, 'friends.html', ctx)
 
 
+@login_required
 def applications(request):
     ctx = base_ctx()
     profiles = list()
@@ -54,7 +60,8 @@ def applications(request):
                                        user2_confirmation=False)) != "<QuerySet []>":
             profiles.append(profile)
     ctx['profiles'] = profiles
-    return render(request, 'friends.html', ctx)
+    ctx['len'] = len(profiles)
+    return render(request, 'applications.html', ctx)
 
 
 

@@ -18,9 +18,6 @@ def base_ctx() -> dict:
             "Войти в аккаунт": {
                 "link": "login"
             },
-            "Выйти из аккаунта": {
-                "link": "logout"
-            }
         }
     }
 

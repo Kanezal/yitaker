@@ -14,12 +14,12 @@
         </div>
         <div class="flex-grow-1 ms-3">
             <h5 class="card-title">{{chat.title}}</h5>
-            <p class="card-text">
+            {% comment %} <p class="card-text">
                 Участники:
                 {% for relation in chat.chatuser.all %}
                     {{relation.user_id.first_name}} {{relation.user_id.last_name}};
                 {% endfor %}
-            </p>
+            </p> {% endcomment %}
     
             <a href="{% url 'chat' chat.id %}" class="stretched-link"></a>
         </div>

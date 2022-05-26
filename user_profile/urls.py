@@ -9,7 +9,7 @@ from .views import *
 urlpatterns = [
     path('<int:id>/', profile, name="profile"),
     path('settings/', profile_edit, name="profile_edit"),
-    path('start_chat/<int:id>/', profile_start_chat, name="profile_start_chat"),
+    #path('start_chat/<int:id>/', profile_start_chat, name="profile_start_chat"),
 ]
 
 # Имя для вызова это сокращенное название функции, то есть должен отражаться

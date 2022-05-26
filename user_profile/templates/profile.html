@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="col-md-9">
-        {% for new in user.news.all %}
+        {% for new in news %}
         <div class="card mx-auto text-dark bg-light mb-3" style="max-width: 700px;">
             <h5 class="card-header d-flex position-relative">
                 <img class="img-fluid rounded-circle me-3" src="{{new.sender.profile.img.url}}" style="height: 50px">
@@ -41,7 +41,7 @@
                 </h5>
                 <p class="card-text">{{ new.text }}</p>
             </div>
-            {% if new.picture != None %}
+            {% if new.picture %}
             <img class="card-img-bottom" src="{{ new.picture.url }}" alt="">
             {% endif %}
         </div>

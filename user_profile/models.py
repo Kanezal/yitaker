@@ -20,6 +20,13 @@ class Profile(models.Model):
     rating = models.IntegerField(default=0)
     img_confirmation = models.BooleanField(default=False)
 
+    GENDER_CHOICES = (
+        ('М', 'Мужской'),
+        ('Ж', 'Женский'),
+        ('Л', 'Любой'),
+    )
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True, blank=True, verbose_name="Пол")
+    birthday = models.DateField(null=True, blank=True, verbose_name="Дата рождения")
     city = models.CharField(max_length=300, null=True, blank=True, verbose_name="Город")
     other_socnet = models.CharField(max_length=300, null=True, blank=True, verbose_name="Другие соцсети")
     career = models.CharField(max_length=300, null=True, blank=True, verbose_name="Деятельность")

@@ -1,11 +1,12 @@
 from django import forms
 from .models import Profile
-
 class ProfileForm(forms.ModelForm):
+    birthday = forms.DateField(input_formats=['%d/%m/%Y'], label='Дата рождения (дд/мм/гггг)')
     class Meta:
         model = Profile
         fields = [
-            'img', 'city', 'other_socnet', 'career',
+            'img', 'gender', 'birthday', 'city',
+            'other_socnet', 'career',
             'interests', 'favorite_musics',
             'favorite_movies', 'favorite_movies',
             'favorite_TVshows', 'favorite_books',
@@ -17,4 +18,3 @@ class ProfileForm(forms.ModelForm):
             'inspires',
         ]
         # fields = '__all__'
-        

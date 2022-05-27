@@ -12,14 +12,16 @@
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                 Главное
                 </button>
             </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <p><label>Имя содержит</label> {{ ProfileFilter.form.first_name }}</p>
                     <p><label>Фамилия содержит</label> {{ ProfileFilter.form.last_name }}</p>
+                    <p>{{ ProfileFilter.form.gender.label }} {{ ProfileFilter.form.gender }}</p>
+                    <p>{{ ProfileFilter.form.birthday.label }} (дд/мм/гггг) {{ ProfileFilter.form.birthday }}</p>
                     <p>{{ ProfileFilter.form.city.label }} {{ ProfileFilter.form.city }}</p>
                     <p>{{ ProfileFilter.form.career.label }} {{ ProfileFilter.form.career }}</p>
                 </div>
@@ -77,11 +79,10 @@
             </div>
         </div>
     </div>
-
+    <br/>
     <button class="btn btn-primary" type="submit">Search</button>
-
     </form>
-
+    <br/><br/>
     {% for profile in profiles %}
         <div class="d-flex position-relative">
             <div class="flex-shrink-0">
@@ -95,5 +96,6 @@
                 <a href="/profile/{{profile.user.id}}" class="stretched-link"></a>
             </div>
         </div>
+        <hr/>
     {% endfor %}
 {% endblock %}

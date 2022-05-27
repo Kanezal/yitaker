@@ -27,7 +27,7 @@ class ProfileFilter(django_filters.FilterSet):
     inspires = CharFilter(field_name='inspires', lookup_expr='icontains')
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name', 'city', 'other_socnet', 'career', 'interests', 'favorite_musics', 'favorite_movies',
+        fields = ['first_name', 'last_name', 'gender', 'birthday', 'city', 'other_socnet', 'career', 'interests', 'favorite_musics', 'favorite_movies',
                   'favorite_TVshows', 'favorite_books', 'favorite_games', 'favorite_quotes', 'status',
                  'about_me', 'life_position', 'political_preferences', 'world_outlook', 'main_in_life',
                  'main_in_people', 'attitude_to_smoking', 'attitude_to_alcohol', 'inspires']

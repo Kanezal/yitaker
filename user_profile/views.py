@@ -26,11 +26,11 @@ def base_ctx(id, user) -> dict:
         ctx["nav"]["Настройки"] = {
             "link": "profile_edit",
         }
-    #else:
-    #    ctx["nav"]["Переписка"] = {
-    #        "link": "profile_start_chat",
-    #        "id": id,
-    #    }
+    else:
+        ctx["nav"]["Переписка"] = {
+            "link": "profile_start_chat",
+            "id": id,
+        }
     return ctx
 
 

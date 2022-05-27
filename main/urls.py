@@ -9,5 +9,4 @@ from .views import *
 urlpatterns = [
     path('', main_page, name="main_page"),
     path('future_plans/', future_plans, name="future_plans"),
-    path('command/', command, name="command")
 ]

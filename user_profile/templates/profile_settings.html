@@ -20,10 +20,10 @@
             <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <p>{{ form.img }}</p>
-                    <p>{{ form.gender.label }} {{ form.gender }}</p>
-                    <p>{{ form.birthday.label }} {{ form.birthday }}</p>
-                    <p>{{ form.city.label }} {{ form.city }}</p>
-                    <p>{{ form.career.label }} {{ form.career }}</p>
+                    <p>{% bootstrap_field form.gender %}</p>
+                    <p>{% bootstrap_field form.birthday %}</p>
+                    <p>{% bootstrap_field form.city %}</p>
+                    <p>{% bootstrap_field form.career %}</p>
                 </div>
             </div>
         </div>
@@ -35,10 +35,10 @@
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <p>{{ form.other_socnet.label }} {{ form.other_socnet }}</p>
-                    <p>{{ form.status.label }} {{ form.status }}</p>
-                    <p>{{ form.about_me.label }} {{ form.about_me }}</p>
-                    <p>{{ form.inspires.label }} {{ form.inspires }}</p>
+                    <p>{% bootstrap_field form.other_socnet %}</p>
+                    <p>{% bootstrap_field form.status %}</p>
+                    <p>{% bootstrap_field form.about_me %}</p>
+                    <p>{% bootstrap_field form.inspires %}</p>
                 </div>
             </div>
         </div>
@@ -50,13 +50,13 @@
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <p>{{ form.interests.label }} {{ form.interests }}</p>
-                    <p>{{ form.favorite_musics.label }} {{ form.favorite_musics }}</p>
-                    <p>{{ form.favorite_movies.label }} {{ form.favorite_movies }}</p>
-                    <p>{{ form.favorite_TVshows.label }} {{ form.favorite_TVshows }}</p>
-                    <p>{{ form.favorite_books.label }} {{ form.favorite_books }}</p>
-                    <p>{{ form.favorite_games.label }} {{ form.favorite_games }}</p>
-                    <p>{{ form.favorite_quotes.label }} {{ form.favorite_quotes }}</p>
+                    <p>{% bootstrap_field form.interests %}</p>
+                    <p>{% bootstrap_field form.favorite_musics %}</p>
+                    <p>{% bootstrap_field form.favorite_movies %}</p>
+                    <p>{% bootstrap_field form.favorite_TVshows %}</p>
+                    <p>{% bootstrap_field form.favorite_books %}</p>
+                    <p>{% bootstrap_field form.favorite_games %}</p>
+                    <p>{% bootstrap_field form.favorite_quotes %}</p>
                 </div>
             </div>
         </div>
@@ -68,13 +68,13 @@
             </h2>
             <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <p>{{ form.life_position.label }} {{ form.life_position }}</p>
-                    <p>{{ form.political_preferences.label }} {{ form.political_preferences }}</p>
-                    <p>{{ form.world_outlook.label }} {{ form.world_outlook }}</p>
-                    <p>{{ form.main_in_life.label }} {{ form.main_in_life }}</p>
-                    <p>{{ form.main_in_people.label }} {{ form.main_in_people }}</p>
-                    <p>{{ form.attitude_to_smoking.label }} {{ form.attitude_to_smoking }}</p>
-                    <p>{{ form.attitude_to_alcohol.label }} {{ form.attitude_to_alcohol }}</p>
+                    <p>{% bootstrap_field form.life_position %}</p>
+                    <p>{% bootstrap_field form.political_preferences %}</p>
+                    <p>{% bootstrap_field form.world_outlook %}</p>
+                    <p>{% bootstrap_field form.main_in_life %}</p>
+                    <p>{% bootstrap_field form.main_in_people %}</p>
+                    <p>{% bootstrap_field form.attitude_to_smoking%}</p>
+                    <p>{% bootstrap_field form.attitude_to_alcohol %}</p>
                 </div>
             </div>
         </div>

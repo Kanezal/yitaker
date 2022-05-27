@@ -23,9 +23,11 @@ from messenger.urls import *
 from community.urls import *
 from friends.urls import *
 from api.urls import *
+from main.urls import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('main.urls')),
     path('profile/', include('user_profile.urls')),
     path('search/', include('search.urls')),
     path('news/', include('news.urls')),

@@ -13,11 +13,40 @@
             <img src="{{ user.profile.img.url }}" class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
-                <p class="card-text">
-                    {% if user.profile.status %}
-                    {{user.profile.status}}
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Интересы
+                    </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                    {% if user.profile.interests %}
+                    <p>Интересы: {{ user.profile.interests }}</p>
                     {% endif %}
-                </p>
+                    {% if user.profile.favorite_musics %}
+                    <p>Любимая музыка: {{ user.profile.favorite_musics }}</p>
+                    {% endif %}
+                    {% if user.profile.favorite_movies %}
+                    <p>Любимые фильмы: {{ user.profile.favorite_movies }}</p>
+                    {% endif %}
+                    {% if user.profile.favorite_TVshows %}
+                    <p>Любимые шоу: {{ user.profile.favorite_TVshows }}</p>
+                    {% endif %}
+                    {% if user.profile.favorite_books %}
+                    <p>Любимые книги: {{ user.profile.favorite_books }}</p>
+                    {% endif %}
+                    {% if user.profile.favorite_games %}
+                    <p>Любимые игры: {{ user.profile.favorite_games }}</p>
+                    {% endif %}
+                    {% if user.profile.favorite_quotes %}
+                    <p>Любимые цитаты: {{ user.profile.favorite_quotes }}</p>
+                    {% endif %}
+                    </div>
+                    </div>
+                    </div>
+                    </div>
                 {% if user != request.user %}
                 <a id="add_friend" class="btn btn-primary" @click="friendButtonClick">[[ friendButtonContent ]]</a>
                 {% endif %}

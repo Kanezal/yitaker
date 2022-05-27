@@ -57,13 +57,6 @@ def view_new_page(request, id):
 def news(request):
     context = base_ctx()
     context['news'] = Novelty.objects.all().order_by("-datetime")
-    context = create_news(request, context)
-
-    return render(request, 'news.html', context)
-
-
-@login_required
-def create_news(request, context):
     if request.method == 'POST':
         addform = AddNoveltyForm(request.POST, request.FILES)
 
@@ -77,12 +70,13 @@ def create_news(request, context):
             )
             record.save()
             messages.add_message(request, messages.SUCCESS, "Пост успешно создан")
+            return redirect('news')
         else:
             messages.add_message(request, messages.ERROR, "Некорректные данные")
     else:
         context['form'] = AddNoveltyForm()
 
-    return context
+    return render(request, 'news.html', context)
 
 
 @login_required

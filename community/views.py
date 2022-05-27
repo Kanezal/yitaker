@@ -83,6 +83,7 @@ def view_group(request, id):
                 group=group,
             )
             record.save()
+            return redirect('view_group', id=id)
     else:
         ctx['form'] = AddNoveltyForm()
 

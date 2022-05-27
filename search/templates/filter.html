@@ -7,8 +7,7 @@
 <div align="center" xmlns="http://www.w3.org/1999/html">
     <h3>Расширенный поиск</h3>
 
-    <form method="get">
-
+<form method="get">
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
@@ -18,12 +17,12 @@
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <p><label>Имя содержит</label> {{ ProfileFilter.form.first_name }}</p>
-                    <p><label>Фамилия содержит</label> {{ ProfileFilter.form.last_name }}</p>
-                    <p>{{ ProfileFilter.form.gender.label }} {{ ProfileFilter.form.gender }}</p>
-                    <p>{{ ProfileFilter.form.birthday.label }} (дд/мм/гггг) {{ ProfileFilter.form.birthday }}</p>
-                    <p>{{ ProfileFilter.form.city.label }} {{ ProfileFilter.form.city }}</p>
-                    <p>{{ ProfileFilter.form.career.label }} {{ ProfileFilter.form.career }}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.first_name %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.last_name %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.gender %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.birthday %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.city %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.career %}</p>
                 </div>
             </div>
         </div>
@@ -35,10 +34,10 @@
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <p>{{ ProfileFilter.form.other_socnet.label }} {{ ProfileFilter.form.other_socnet }}</p>
-                    <p>{{ ProfileFilter.form.status.label }} {{ ProfileFilter.form.status }}</p>
-                    <p>{{ ProfileFilter.form.about_me.label }} {{ ProfileFilter.form.about_me }}</p>
-                    <p>{{ ProfileFilter.form.inspires.label }} {{ ProfileFilter.form.inspires }}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.other_socnet %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.status %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.about_me %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.inspires %}</p>
                 </div>
             </div>
         </div>
@@ -50,13 +49,13 @@
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <p>{{ ProfileFilter.form.interests.label }} {{ ProfileFilter.form.interests }}</p>
-                    <p>{{ ProfileFilter.form.favorite_musics.label }} {{ ProfileFilter.form.favorite_musics }}</p>
-                    <p>{{ ProfileFilter.form.favorite_movies.label }} {{ ProfileFilter.form.favorite_movies }}</p>
-                    <p>{{ ProfileFilter.form.favorite_TVshows.label }} {{ ProfileFilter.form.favorite_TVshows }}</p>
-                    <p>{{ ProfileFilter.form.favorite_books.label }} {{ ProfileFilter.form.favorite_books }}</p>
-                    <p>{{ ProfileFilter.form.favorite_games.label }} {{ ProfileFilter.form.favorite_games }}</p>
-                    <p>{{ ProfileFilter.form.favorite_quotes.label }} {{ ProfileFilter.form.favorite_quotes }}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.interests %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.favorite_musics %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.favorite_movies %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.favorite_TVshows %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.favorite_books %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.favorite_games %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.favorite_quotes %}</p>
                 </div>
             </div>
         </div>
@@ -68,20 +67,21 @@
             </h2>
             <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <p>{{ ProfileFilter.form.life_position.label }} {{ ProfileFilter.form.life_position }}</p>
-                    <p>{{ ProfileFilter.form.political_preferences.label }} {{ ProfileFilter.form.political_preferences }}</p>
-                    <p>{{ ProfileFilter.form.world_outlook.label }} {{ ProfileFilter.form.world_outlook }}</p>
-                    <p>{{ ProfileFilter.form.main_in_life.label }} {{ ProfileFilter.form.main_in_life }}</p>
-                    <p>{{ ProfileFilter.form.main_in_people.label }} {{ ProfileFilter.form.main_in_people }}</p>
-                    <p>{{ ProfileFilter.form.attitude_to_smoking.label }} {{ ProfileFilter.form.attitude_to_smoking }}</p>
-                    <p>{{ ProfileFilter.form.attitude_to_alcohol.label }} {{ ProfileFilter.form.attitude_to_alcohol }}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.life_position %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.political_preferences %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.world_outlook %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.main_in_life %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.main_in_people %}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.attitude_to_smoking%}</p>
+                    <p>{% bootstrap_field ProfileFilter.form.attitude_to_alcohol %}</p>
                 </div>
             </div>
         </div>
     </div>
     <br/>
     <button class="btn btn-primary" type="submit">Поиск</button>
-    </form>
+</form>
+
     <br/><br/>
     {% for profile in profiles %}
         <div class="d-flex position-relative">

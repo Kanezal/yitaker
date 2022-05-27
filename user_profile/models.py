@@ -12,8 +12,8 @@ class Profile(models.Model):
 
     img = ResizedImageField(
         size=[500, 500],
-        default='static/images/avatars/base.png',
-        upload_to='static/images/avatars/%Y/%m/%d/',
+        default='images/avatars/base.png',
+        upload_to='images/avatars/%Y/%m/%d/',
         crop=['middle', 'center'],
         quality=50,
     )

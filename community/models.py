@@ -5,8 +5,8 @@ from django.db import models
 class Community(models.Model):
     name = models.CharField(max_length=50)
     icon = models.ImageField(
-        upload_to='static/images/community_icons/%Y/%m/%d/',
-        default='static/images/community_icons/no_img.png'
+        upload_to='images/community_icons/%Y/%m/%d/',
+        default='images/community_icons/no_img.png'
     )
     creater = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
     description = models.CharField(max_length=1000)

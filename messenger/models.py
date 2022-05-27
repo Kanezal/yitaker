@@ -9,7 +9,7 @@ class Chat(models.Model):
     title = models.CharField(max_length=255, null=True)# заголовок чата, его название
     icon = ResizedImageField(
         size=[500, 500],
-        default='static/images/avatars/base.png',
+        default='images/avatars/base.png',
         upload_to='static/tmp/',
         crop=['middle', 'center'],
         quality=50,
@@ -26,8 +26,8 @@ class GroupChat(models.Model):
     user_creator = models.ForeignKey(to = User, on_delete = models.SET_NULL, null=True)# id пользователя создавшего чат
     icon = ResizedImageField(
         size=[500, 500],
-        default='static\\images\\avatars\\base.png',
-        upload_to='static/images/avatars/%Y/%m/%d/',
+        default='images\\avatars\\base.png',
+        upload_to='images/avatars/%Y/%m/%d/',
         crop=['middle', 'center'],
         quality=50,
     )

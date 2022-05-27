@@ -59,7 +59,7 @@ def profile_edit(request):
             'favorite_games', 'favorite_quotes',
             'status', 'about_me', 'life_position',
             'political_preferences', 'world_outlook',
-            'world_outlook', 'main_in_life',
+            'world_outlook', 'main_in_life', 'main_in_people',
             'attitude_to_smoking', 'attitude_to_alcohol',
             'inspires',
         ]

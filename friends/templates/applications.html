@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+
+{% block head %}
+<title>Друзья</title>
+{% endblock %}
+{% block main %}
+    {% if len == 0 %}
+    <div class="alert alert-secondary"  role="alert">
+        <div class="text-center">Заявок в друзья нет</div>
+    </div>
+    {% endif %}
+    {% for profile in profiles %}
+        {% if profile.user.id != request.user.id %}
+            <div class="d-flex position-relative">
+                <div class="flex-shrink-0">
+                    <img src="{{ profile.img.url }}" class="rounded-circle" alt="Изображение"
+                        style="object-fit: cover; width: 100px; height: 100px;">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                    <h5 class="card-title">{{profile.user.first_name}} {{profile.user.last_name}}</h5>
+                    {% if profile.about_me != None %}
+                        <p class="card-text">{{ profile.about_me }}</p>
+                    {% endif %}
+
+                    <a href="/profile/{{profile.user.id}}" class="stretched-link"></a>
+                </div>
+            </div>
+            <hr>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+
+{% block head %}
+<title>Настройка профиля</title>
+{% endblock %}
+
+{% block main %}
+<div align="center" xmlns="http://www.w3.org/1999/html">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                Главное
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <p>{{ form.img }}</p>
+                    <p>{% bootstrap_field form.gender %}</p>
+                    <p>{% bootstrap_field form.birthday %}</p>
+                    <p>{% bootstrap_field form.city %}</p>
+                    <p>{% bootstrap_field form.career %}</p>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Обо мне
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <p>{% bootstrap_field form.other_socnet %}</p>
+                    <p>{% bootstrap_field form.status %}</p>
+                    <p>{% bootstrap_field form.about_me %}</p>
+                    <p>{% bootstrap_field form.inspires %}</p>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Интересы
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <p>{% bootstrap_field form.interests %}</p>
+                    <p>{% bootstrap_field form.favorite_musics %}</p>
+                    <p>{% bootstrap_field form.favorite_movies %}</p>
+                    <p>{% bootstrap_field form.favorite_TVshows %}</p>
+                    <p>{% bootstrap_field form.favorite_books %}</p>
+                    <p>{% bootstrap_field form.favorite_games %}</p>
+                    <p>{% bootstrap_field form.favorite_quotes %}</p>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                Жизненная позиция
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <p>{% bootstrap_field form.life_position %}</p>
+                    <p>{% bootstrap_field form.political_preferences %}</p>
+                    <p>{% bootstrap_field form.world_outlook %}</p>
+                    <p>{% bootstrap_field form.main_in_life %}</p>
+                    <p>{% bootstrap_field form.main_in_people %}</p>
+                    <p>{% bootstrap_field form.attitude_to_smoking%}</p>
+                    <p>{% bootstrap_field form.attitude_to_alcohol %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <button class="d-grid mx-auto btn btn-primary" type="submit">Сохранить</button>
+</form>
+</div>
+
+{% endblock %}

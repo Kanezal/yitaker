@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+
+{% block head %}
+<title>Новости</title>
+{% endblock %}
+
+
+{% block main %}
+<div class="card mx-auto text-dark bg-light mb-3 mt-3" , style="max-width: 700px;">
+    <div class="card-body">
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+            aria-controls="collapseExample">
+            Добавить пост
+        </a>
+        <div class="collapse mt-3" id="collapseExample">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                {% if field.name != "picture" %}
+                {% bootstrap_field field show_label=False %}
+                {% else %}
+                {% bootstrap_field field %}
+                {% endif %}
+                {% endfor %}
+
+                {% bootstrap_button button_type="submit" button_class="btn-success" content="Создать пост" %}
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr class="mx-auto" style="max-width: 700px;">
+
+{% for new in news %}
+<div class="card mx-auto text-dark bg-light mb-3" style="max-width: 700px;">
+    <h5 class="card-header d-flex position-relative">
+        <img class="img-fluid rounded-circle me-3" src="{{new.sender.profile.img.url}}" style="height: 50px">
+        <div class="ml-2">
+            <a href="{% url 'profile' new.sender.id %}" class="h5 m-0 stretched-link text-black" style="color: #000000;
+            text-decoration: none;"> {{new.sender.first_name}} {{new.sender.last_name}}</a>
+            <div class="h7 text-muted">{{new.datetime}}</div>
+        </div>
+    </h5>
+    <div class="card-body">
+        <h5 class="card-title">
+            {{ new.name_new }}
+        </h5>
+        <p class="card-text">{{ new.text }}</p>
+    </div>
+    {% if new.picture %}
+    <img class="card-img-bottom" src="{{ new.picture.url }}" alt="">
+    {% endif %}
+</div>
+{% endfor %}
+{% endblock %}

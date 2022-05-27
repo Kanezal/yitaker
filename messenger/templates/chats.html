@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Чаты</title>
+{% endblock %}
+
+{% block main %}
+    {% if len == 0 %}
+        <div class="alert alert-secondary"  role="alert">
+        <div class="text-center">У Вас пока нет переписок</div>
+        </div>
+    {% endif %}
+    {% for chat in chats %}
+    <p> <strong><td><a href=""></a></td></strong>   {{chat.user_creator}} </p>
+    <div class="d-flex position-relative">
+        <div class="flex-shrink-0">
+            <img src="{{ chat.icon.url }}" class="rounded-circle" alt="Изображение"
+                style="object-fit: cover; width: 100px; height: 100px;">
+        </div>
+        <div class="flex-grow-1 ms-3">
+            <h5 class="card-title">{{chat.title}}</h5>
+            {% comment %} <p class="card-text">
+                Участники:
+                {% for relation in chat.chatuser.all %}
+                    {{relation.user_id.first_name}} {{relation.user_id.last_name}};
+                {% endfor %}
+            </p> {% endcomment %}
+    
+            <a href="{% url 'chat' chat.id %}" class="stretched-link"></a>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+    
+{% endblock %}

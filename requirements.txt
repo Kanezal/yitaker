@@ -1,0 +1,13 @@
+asgiref==3.5.0
+Django==4.0.4
+djangorestframework==3.13.1
+pytz==2022.1
+sqlparse==0.4.2
+pillow
+django-bootstrap-v5
+django_resized==1.0.0
+django-filter==21.1.0
+psycopg2==2.9.3
+gunicorn==20.0.4
+whitenoise==5.2.0
+django-cloudinary-storage==0.3.0

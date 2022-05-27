@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load bootstrap5 %}
+
+{% block head %}
+<title>Мои сообщества</title>
+{% endblock %}
+
+
+{% block main %}
+{% if len == 0 %}
+    <div class="alert alert-secondary"  role="alert">
+        <div class="text-center">Вы пока не вступили ни в какое сообщество</div>
+    </div>
+{% endif %}
+{% for group in groups %}
+<div class="d-flex position-relative">
+    <div class="flex-shrink-0">
+        <img src="{{ group.icon.url }}" class="rounded-circle" alt="Изображение"
+            style="object-fit: cover; width: 100px; height: 100px;">
+    </div>
+    <div class="flex-grow-1 ms-3">
+        <h5 class="card-title">{{group.name}}</h5>
+        <p class="card-text">{{ group.description }}</p>
+
+        <a href="/community/{{group.id}}" class="stretched-link"></a>
+    </div>
+</div>
+<hr>
+{% endfor %}
+{% endblock %}

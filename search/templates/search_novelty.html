@@ -2,10 +2,15 @@
 
 {% load bootstrap5 %}
 
+
+{% block head %}
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+{% endblock %}
+
 {% block main %}
     <div>
         <br/><br/>
-        <h3>Live Search Of Social Network Novelties</h3>
+        <h3>Поиск Новостей</h3>
         <div class="container">
             <div align="center">
                 <input type="text" name="search" id="search" placeholder="Search" class="form-control" />

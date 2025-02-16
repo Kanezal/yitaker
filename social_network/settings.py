@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['yitaker.up.railway.app']
 
+CSRF_TRUSTED_ORIGINS = ['https://yitaker.up.railway.app']
 
 # Application definition
 
